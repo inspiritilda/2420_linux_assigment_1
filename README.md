@@ -117,7 +117,7 @@ doctl compute image create "Example Image" --image-url "https://example.com/imag
 ## Configuring cloud-init
 
 ### What is Cloud-Init?
-`cloud-init` is a tool used in cloud environments to automate the initial setup of virtual machine (Canonical, n.d.; DigitalOcean, n.d.). It allows users to configure settings like network configuration, user creation, and package installation during the first boot of the instance (Canonical, n.d.). This automation reduces manual setup time and ensures consistency across deployments.
+`cloud-init` is a tool used in cloud environments to automate the initial setup of virtual machine (Canonical, n.d.; DigitalOcean, n.d.). It allows users to configure settings like network configuration, user creation, and package installation during the first boot of the instance (Canonical, n.d.; Cloud-init, n.d.). This automation reduces manual setup time and ensures consistency across deployments.
 
 ### Sample cloud-init Configuration File:
 After you upload your public SSH key to your DigitalOcean account, create a file named `cloud-config.yml` with the following content:
@@ -137,10 +137,10 @@ runcmd:
   - 'echo Droplet: $(hostname), IP Address: $PUBLIC_IPV4 > /var/www/html/index.html'
 ```
 The YAML file for this tutorial defines:
-* A new user (`example-user`) account on the Droplet with root-level permissions and the user’s preferred shell (`bash`). It also specifies the SSH key to import from GitHub and associates with the new user account.
-* An option to disable root user access so that only the `example-user` user can access the Droplet.
-* Which packages to install upon deployment, in this case `nginx`.
-* Two commands that create an environment variable and configure the nginx server.
+* New User Creation: A new user account (`example-user`) is created on the Droplet with root-level permissions and the preferred shell (`bash`). This configuration also specifies the SSH key to import from GitHub, allowing for secure access to the Droplet (DigitalOcean, n.d.).
+* Root Access Control: The configuration disables root user access, ensuring that only the `example-user` can log in to the Droplet (DigitalOcean, n.d.; Cloud-init, n.d.).
+* Package Installation: The file specifies that the `nginx` web server should be installed upon deployment. This ensures that the server is ready to serve web content immediately after initialization (DigitalOcean, n.d.).
+* Command Execution: Two commands are included to create an environment variable and configure the `nginx` server. The first command retrieves the public IPv4 address of the Droplet, while the second command writes the Droplet's hostname and IP address to an HTML file, which can be accessed via a web browser.
 
 ## Deploying the droplet
 Now that everything is configured, you're ready to deploy your Arch Linux droplet using `doctl` and the `cloud-init` configuration file.
@@ -198,11 +198,15 @@ By understanding these processes, you’re better equipped to manage and deploy 
 
 - Chacon, S., & Straub, B. (2017). *Pro Git* (2nd ed.). Apress. Retrieved from [https://git-scm.com/book/en/v2](https://git-scm.com/book/en/v2)
 
+- Cloud-init. (n.d.). *cloud-init docs*. Retrieved from [https://docs.cloud-init.io/en/latest/index.html](https://docs.cloud-init.io/en/latest/index.html)
+
 - DigitalOcean. (n.d.). *How to create and manage SSH keys on DigitalOcean*. Retrieved from [https://www.digitalocean.com/docs/ssh/create-ssh-keys/](https://www.digitalocean.com/docs/ssh/create-ssh-keys/)
 
 - DigitalOcean. (n.d.). *How to Set Up and Use DigitalOcean Spaces with the DigitalOcean CLI*. Retrieved from [https://www.digitalocean.com/docs/spaces/how-to/using-doctl/](https://www.digitalocean.com/docs/spaces/how-to/using-doctl/)
 
 - DigitalOcean. (n.d.). *How to use cloud-init to configure a droplet*. Retrieved from [https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/](https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/)
+
+- DigitalOcean. (n.d.). *How to Perform Initial Server Configuration with Cloud-Init*. Retrieved from [https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup](https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup)
 
 - DigitalOcean. (n.d.). *Understanding Cloud-Init and the Configuration Options*. Retrieved from [https://www.digitalocean.com/community/tutorials/understanding-cloud-init](https://www.digitalocean.com/community/tutorials/understanding-cloud-init)
 
