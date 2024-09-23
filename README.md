@@ -10,7 +10,7 @@
   - [Generating API token](#generating-api-token)
     - [To generate a personal access token:](#to-generate-a-personal-access-token)
     - [Use the API token to grant account access to doctl](#use-the-api-token-to-grant-account-access-to-doctl)
-    - [Authenticate `doctl`:](#authenticate-doctl)
+  - [Authenticate `doctl`:](#authenticate-doctl)
   - [Validate that doctl is working](#validate-that-doctl-is-working)
   - [Configuring cloud-init](#configuring-cloud-init)
     - [Sample cloud-init Configuration File:](#sample-cloud-init-configuration-file)
@@ -55,49 +55,28 @@ When you run the authentication, it will ask for an API token.
 ![personal access token](images/new%20personal%20token.png)
 
 ### Use the API token to grant account access to doctl
-Use the API token to grant `doctl` access to your DigitalOcean account. Pass in the token string when prompted by `doctl auth init`, and give this authentication context a name.
+Now that you have your API token, you can use it to link `doctl` to your DigitalOcean account. When you run `doctl auth init`, just enter the token when it asks for it and give this authentication context a name if you would like. It looks like this:
 ```bash
 doctl auth init --context <NAME>
 ```
+![validating token](images/validating%20token.png)
 
-Authentication contexts let you switch between multiple authenticated accounts. You can repeat steps 2 and 3 to add other DigitalOcean accounts, then list and switch between authentication contexts:
-```bash
-doctl auth list
-doctl auth switch --context <NAME>
-```
-
-### Authenticate `doctl`:
-After you have installed `doctl`, you will need to link it to your DigitalOcean account. To do that, run:
+## Authenticate `doctl`:
+Once you have installed `doctl`, you will need to link it to your DigitalOcean account. To do that, run:
 ```bash
 doctl auth init
 ```
+![authenticate doctl](images/authenticate%20doctl.png)
 
 ## Validate that doctl is working
-To confirm that you have successfully authorized `doctl`, review your account details by running:
+To confirm that you have successfully linked `doctl` to your account, you can look at your account details by running:
 ```bash
 doctl account get
 ```
-
 If successful, the output looks like:
 ```bash
 Email                      Droplet Limit    Email Verified    UUID                                        Status
 sammy@example.org          10               true              3a56c5e109736b50e823eaebca85708ca0e5087c    active
-```
-
-To confirm that you have successfully granted write access to `doctl`, create an Ubuntu 23.10 Droplet in the SFO2 region by running:
-```bash
-doctl compute droplet create --region sfo2 --image ubuntu-23-10-x64 --size s-1vcpu-1gb <DROPLET-NAME>
-```
-
-You can get a full list of available Droplet images by running doctl compute image list. The output of that command includes an ID column with the new Droplet’s ID. For example:
-```bash
-ID           Name            Public IPv4    Private IPv4    Public IPv6    Memory    VCPUs    Disk    Region    Image                       Status    Tags    Features    Volumes
-187949338    droplet-name                                                  1024      1        25      sfo2      Ubuntu 18.04.3 (LTS) x64    new
-```
-
-Use that value to delete the Droplet by running:
-```bash
-doctl compute droplet delete <DROPLET-ID>
 ```
 
 ## Configuring cloud-init
