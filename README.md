@@ -24,13 +24,13 @@
     - [Connect to Your Droplet via SSH:](#connect-to-your-droplet-via-ssh)
 
 ## Introduction
-This guide will walk you through creating an Arch Linux droplet on DigitalOcean using the command-line tool doctl and cloud-init. We will set up SSH keys for secure access, upload a custom Arch Linux image, and automate the droplet setup using cloud-init.
+This guide will show you how to create an Arch Linux droplet on DigitalOcean using `doctl` command-line tool and `cloud-init`.
+We will go step by step to set up SSH keys for secure access, upload a custom Arch Linux image, and automate the setup process with `cloud-init`.
 
 ### Prerequisites:
-- A basic understanding of Linux command-line usage.
-- A DigitalOcean account.
-- Your local machine should have ssh installed.
-- Familiarity with using git for version control.
+- You will need a DigitalOcean account.
+- Make sure `ssh` is installed on your local machine.
+- You should have a basic idea of how to use the Linux command line.
 
 ##  Installing and Setting up doctl
 `doctl` is the official DigitalOcean CLI tool that allows you to manage your resources from the command line.
