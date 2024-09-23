@@ -15,13 +15,13 @@
   - [Setting up a SSH key](#setting-up-a-ssh-key)
     - [Generate SSH Keys:](#generate-ssh-keys)
     - [Add SSH Key to DigitalOcean:](#add-ssh-key-to-digitalocean)
+  - [Uploading a custom image to DigitalOcean](#uploading-a-custom-image-to-digitalocean)
+    - [Steps to Upload a Custom Image:](#steps-to-upload-a-custom-image)
   - [Configuring cloud-init](#configuring-cloud-init)
     - [Sample cloud-init Configuration File:](#sample-cloud-init-configuration-file)
   - [Deploying the droplet](#deploying-the-droplet)
     - [Droplet Creation Command:](#droplet-creation-command)
   - [Verifying everything worked](#verifying-everything-worked)
-  - [Uploading a custom image to DigitalOcean](#uploading-a-custom-image-to-digitalocean)
-    - [Steps to Upload a Custom Image:](#steps-to-upload-a-custom-image)
 
 
 ## Introduction
@@ -87,6 +87,18 @@ Next, to add your SSH key to DigitalOcean, use this command:
 doctl compute ss-key
 ```
 
+## Uploading a custom image to DigitalOcean
+To create a droplet running Arch Linux, you first need to upload a custom Arch Linux image to your DigitalOcean account.
+### Steps to Upload a Custom Image:
+1. run `doctl compute image create`. Basic usage looks like this, but you can read the usage docs for more details:
+```bash
+doctl compute image create <image-name> [flags]
+```
+2. The following example creates a custom image named "Example Image" from a URL and stores it in the `nyc1` region:
+```bash
+doctl compute image create "Example Image" --image-url "https://example.com/image.iso" --region nyc1
+```
+
 ## Configuring cloud-init
 `cloud-init` is super handy for automating the setup of your droplet right when it is created. We will use it to create a new user, install some packages, and set up SSH access without having to do it all manually.
 ### Sample cloud-init Configuration File:
@@ -146,15 +158,3 @@ example-user@first-droplet:~$
 Now you're logged in, and you can explore the Droplet!
 
 To check if the nginx configuration worked, just paste one of the Droplet's public IP addresses into your web browser and hit Enter. You should see the nginx homepage, which will display the name of your Droplet and its IP address.
-
-## Uploading a custom image to DigitalOcean
-To create a droplet running Arch Linux, you first need to upload a custom Arch Linux image to your DigitalOcean account.
-### Steps to Upload a Custom Image:
-1. run `doctl compute image create`. Basic usage looks like this, but you can read the usage docs for more details:
-```bash
-doctl compute image create <image-name> [flags]
-```
-2. The following example creates a custom image named "Example Image" from a URL and stores it in the `nyc1` region:
-```bash
-doctl compute image create "Example Image" --image-url "https://example.com/image.iso" --region nyc1
-```
