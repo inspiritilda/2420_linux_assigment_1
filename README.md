@@ -19,8 +19,6 @@
   - [Deploying the droplet](#deploying-the-droplet)
     - [Droplet Creation Command:](#droplet-creation-command)
   - [Verifying everything worked](#verifying-everything-worked)
-    - [Check Droplet Status:](#check-droplet-status)
-    - [Connect to Your Droplet via SSH:](#connect-to-your-droplet-via-ssh)
   - [Uploading a custom image to DigitalOcean](#uploading-a-custom-image-to-digitalocean)
     - [Steps to Upload a Custom Image:](#steps-to-upload-a-custom-image)
 
@@ -118,24 +116,34 @@ Now that everything is set up, you can deploy your Arch Linux droplet using doct
 ``` bash
 doctl compute droplet create --image ubuntu-22-04-x64 --size s-1vcpu-1gb --region nyc1 --ssh-keys git-user --user-data-file <path-to-your-cloud-init-file> --wait first-droplet second-droplet
 ```
-* `--region`: Specify the region, e.g., nyc3.
-* `--size`: Define the droplet size, e.g., s-1vcpu-1gb.
-* `--image`: Use the ID of your custom Arch Linux image.
-* `--ssh-keys`: Add your SSH key fingerprint (which you can retrieve from the DigitalOcean control panel).
-* `--user-data-file`: Pass the cloud-init file to automate the initial setup.
+* `doctl compute droplet create`: the command `doctl` requires to create droplets.
+* `--image ubuntu-22-04-x64`: The OS image used to create the Droplet. In this case the Droplets uses the Ubuntu 22.04 operating system.
+* `--size s-1vcpu-1gb`: The number of processors and the amount of RAM each Droplet has. In this case, each Droplet has one processor and 1 GB of RAM.
+* `--region nyc1`: The region to create the Droplets in. In this example, doctl deploys the Droplets into the NYC1 datacenter region.
+* `--ssh-keys`: The SSH keys to import into the Droplet from your DigitalOcean account. You can retrieve a list of available keys by running doctl compute ssh-key list.
+* `--user-data-file <path-to-your-cloud-init-file`: Specifies the path to your cloud-config.yaml file. For example, /Users/example-user/cloud-config.yaml.
+* `--wait`: Tells doctl to wait for the Droplets to finish deployment before accepting new commands.
+* `first-droplet second-droplet`: The names of the Droplets being deployed. You can deploy as many Droplets as you like by providing a name for each Droplet at the end of the command.
+
+Once you enter the command, the terminal prompt remains blank until the Droplets have finished deploying. This may take a few minutes. A successful deploy returns output that looks like this:
+```bash
+ID           Name              Public IPv4       Private IPv4    Public IPv6    Memory    VCPUs    Disk    Region    Image               VPC UUID                                Status    Tags    Features                            Volumes
+311143987    second-droplet    203.0.113.199    203.0.113.4                     1024      1        25      nyc1      Ubuntu 22.04 x64    cfcbcc95-365a-4705-a18d-54abde1fc7b4    active            droplet_agent,private_networking
+311912986    first-droplet     203.0.113.146    203.0.113.3                     1024      1        25      nyc1      Ubuntu 22.04 x64    cfcbcc95-365a-4705-a18d-54abde1fc7b4    active            droplet_agent,private_networking
+```
 
 ## Verifying everything worked
-### Check Droplet Status:
-Run the following command to ensure the droplet was created successfully:
+After you’ve successfully deployed the Droplets, it’s time to check if the cloud-init configuration worked. You can log in to one of the Droplets using the username you defined in the cloud-config.yaml file. To do this, use the following OpenSSH command, making sure to replace the placeholder with your Droplet's public IPv4 address:
 ```bash
-doctl compute droplet list
+ssh example-user@<your-droplet-ip-address>
 ```
-### Connect to Your Droplet via SSH:
-To connect to your droplet, use the IP address listed in the previous command:
+If everything is set up correctly, your terminal prompt should change to something like this:
 ```bash
-ssh newuser@<your-droplet-ip>
+example-user@first-droplet:~$
 ```
-If the `cloud-init` script worked correctly, you should be logged in as `newuser`, and the specified packages should be installed.
+Now you're logged in, and you can explore the Droplet!
+
+To check if the nginx configuration worked, just paste one of the Droplet's public IP addresses into your web browser and hit Enter. You should see the nginx homepage, which will display the name of your Droplet and its IP address.
 
 ## Uploading a custom image to DigitalOcean
 To create a droplet running Arch Linux, you first need to upload a custom Arch Linux image to your DigitalOcean account.
