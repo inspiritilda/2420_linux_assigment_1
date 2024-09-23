@@ -43,6 +43,7 @@ On Arch Linux, install `doctl` with the pacman package manager. You can run:
 ```bash
 sudo pacman -S doctl
 ```
+![installing doctl](images/installing%20doctl.png)
 
 ## Generating API token
 When you run the authentication, it will ask for an API token.
