@@ -80,6 +80,7 @@ If successful, the output looks like:
 Email                      Droplet Limit    Email Verified    UUID                                        Status
 sammy@example.org          10               true              3a56c5e109736b50e823eaebca85708ca0e5087c    active
 ```
+![validate doctl](images/validate%20account%20link.png)
 
 ## Setting up a SSH key
 SSH keys are great for secure, passwordless access to your server (Arch Linux, n.d.).
