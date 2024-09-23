@@ -13,27 +13,30 @@
   - [Authenticate `doctl`:](#authenticate-doctl)
   - [Validate that doctl is working](#validate-that-doctl-is-working)
   - [Setting up a SSH key](#setting-up-a-ssh-key)
-    - [Generate SSH Keys:](#generate-ssh-keys)
-    - [Add SSH Key to DigitalOcean:](#add-ssh-key-to-digitalocean)
+    - [Understanding SSH Keys](#understanding-ssh-keys)
   - [Uploading a custom image to DigitalOcean](#uploading-a-custom-image-to-digitalocean)
     - [Steps to Upload a Custom Image:](#steps-to-upload-a-custom-image)
   - [Configuring cloud-init](#configuring-cloud-init)
+    - [What is Cloud-Init?](#what-is-cloud-init)
     - [Sample cloud-init Configuration File:](#sample-cloud-init-configuration-file)
   - [Deploying the droplet](#deploying-the-droplet)
     - [Droplet Creation Command:](#droplet-creation-command)
   - [Verifying everything worked](#verifying-everything-worked)
-
+  - [Conclusion](#conclusion)
+    - [Next Steps](#next-steps)
 
 ## Introduction
 This guide will show you how to create an Arch Linux droplet on DigitalOcean using `doctl` command-line tool and `cloud-init`.
 We will go step by step to set up SSH keys for secure access, upload a custom Arch Linux image, and automate the setup process with `cloud-init`.
+
 ### Prerequisites:
 - A DigitalOcean account.
 - `ssh` installed on your local machine.
 - A basic understanding of how to use the Linux command line.
 
-##  Installing and Setting up doctl
+## Installing and Setting up doctl
 `doctl` is the official DigitalOcean CLI tool, and it makes it super easy to manage everything right from your terminal.
+
 ### Steps to Install doctl:
 On Arch Linux, install `doctl` with the pacman package manager. You can run:
 ```bash
@@ -42,12 +45,14 @@ sudo pacman -S doctl
 
 ## Generating API token
 When you run the authentication, it will ask for an API token.
+
 ### To generate a personal access token:
 1. Log-in to your DigitalOcean Control Panel.
 2. On the left menu, click API (this takes you to the "Applications & API" page under the Tokens tab).
 3. In the Personal access tokens section, click the Generate New Token button.
 4. You will receive your own personal access Token jsut like the screenshot below.
 ![personal access token](images/new%20personal%20token.png)
+
 ### Use the API token to grant account access to doctl
 Now that you have your API token, you can use it to link `doctl` to your DigitalOcean account. When you run `doctl auth init`, just enter the token when it asks for it and give this authentication context a name if you would like. It looks like this:
 ```bash
@@ -75,17 +80,22 @@ sammy@example.org          10               true              3a56c5e109736b50e8
 
 ## Setting up a SSH key
 SSH keys are great for secure, passwordless access to your server.
-### Generate SSH Keys:
-To create a new SSH key pair on your local machine, run:
-```bash
-doctl compute ssh-key create <key-name>
-```
-* Make sure give your SSH a name by replacing `<key-name>`.
-### Add SSH Key to DigitalOcean:
-Next, to add your SSH key to DigitalOcean, use this command:
-```bash
-doctl compute ss-key
-```
+
+1. **Generate SSH Key Pair:**
+    ```bash
+    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+    ```
+    This command generates a new SSH key pair. Follow the prompts to save it in the default location.
+
+2. **Add SSH Key to DigitalOcean:**
+    Once your SSH key is generated, add it to your DigitalOcean account with:
+    ```bash
+    doctl compute ssh-key create <key-name> --public-key-file ~/.ssh/id_rsa.pub
+    ```
+    Replace `<key-name>` with a descriptive name for your key.
+
+### Understanding SSH Keys
+SSH (Secure Shell) keys are a pair of cryptographic keys used for authenticating secure connections. Unlike passwords, SSH keys provide a more secure method of authentication as they are not transmitted over the network, making them resistant to brute-force attacks. By using SSH keys, you can log in to your server without the need for a password, enhancing security.
 
 ## Uploading a custom image to DigitalOcean
 To create a droplet running Arch Linux, you first need to upload a custom Arch Linux image to your DigitalOcean account.
@@ -100,7 +110,10 @@ doctl compute image create "Example Image" --image-url "https://example.com/imag
 ```
 
 ## Configuring cloud-init
-`cloud-init` is super handy for automating the setup of your droplet right when it is created. We will use it to create a new user, install some packages, and set up SSH access without having to do it all manually.
+
+### What is Cloud-Init?
+`cloud-init` is a tool used in cloud environments to automate the initial setup of virtual machines. It allows users to configure settings like network configuration, user creation, and package installation during the first boot of the instance. This automation reduces manual setup time and ensures consistency across deployments.
+
 ### Sample cloud-init Configuration File:
 After you upload your public SSH key to your DigitalOcean account, create a file named `cloud-config.yml` with the following content:
 ```bash
@@ -126,13 +139,14 @@ The YAML file for this tutorial defines:
 
 ## Deploying the droplet
 Now that everything is configured, you're ready to deploy your Arch Linux droplet using `doctl` and the `cloud-init` configuration file.
+
 ### Droplet Creation Command:
 To create the droplets, run the following command:
 ``` bash
-doctl compute droplet create --image ubuntu-22-04-x64 --size s-1vcpu-1gb --region nyc1 --ssh-keys git-user --user-data-file <path-to-your-cloud-init-file> --wait first-droplet second-droplet
+doctl compute droplet create --image arch-linux-2024-01-01 --size s-1vcpu-1gb --region nyc1 --ssh-keys git-user --user-data-file <path-to-your-cloud-init-file> --wait first-droplet second-droplet
 ```
 Here is a breakdown of the command:
-* `--image ubuntu-22-04-x64`: This option specifies the operating system image for the droplets, which in this case is Ubuntu 22.04.
+* `--image arch-linux-2024-01-01`: This option specifies the operating system image for the droplets, which in this case is arch-linux-2024-01-01.
 * `--size s-1vcpu-1gb`: This specifies the resources for each droplet. Here, each droplet is allocated one virtual CPU and 1 GB of RAM.
 * `--region nyc1`: This option defines the region for deploying the droplets. In this example, the droplets will be created in the NYC1 datacenter.
 * `--ssh-keys`: This parameter allows you to import SSH keys into the droplet from your DigitalOcean account. You can list available keys using the command `doctl compute ssh-key list`.
@@ -159,3 +173,13 @@ example-user@first-droplet:~$
 At this point, you are logged in and can explore the droplet.
 
 To verify that the nginx configuration is functioning, simply copy one of the droplet's public IP addresses and paste it into your web browser, then press Enter. You should see the nginx homepage, which will display the name of your droplet along with its IP address. This indicates that your setup was successful.
+
+## Conclusion
+Congratulations! You have successfully created an Arch Linux droplet on DigitalOcean using the `doctl` command-line tool and automated the setup with `cloud-init`. You learned how to generate SSH keys for secure access, upload a custom image, and configure your server environment effectively.
+
+### Next Steps
+- Explore additional packages and configurations you can install via `cloud-init` to enhance your server's capabilities.
+- Consider setting up a firewall using `ufw` to further secure your droplet.
+- Learn about configuring web servers or databases to utilize your new Arch Linux server for development or hosting purposes.
+
+By understanding these processes, you’re better equipped to manage and deploy servers in a cloud environment. Happy cloud computing!
