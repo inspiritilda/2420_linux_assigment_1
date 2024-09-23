@@ -1,8 +1,8 @@
 # Setting up a DigitalOcean droplet using `doctl` and `cloud-init`
 
-# Table of Contents
+## Table of Contents
 - [Setting up a DigitalOcean droplet using `doctl` and `cloud-init`](#setting-up-a-digitalocean-droplet-using-doctl-and-cloud-init)
-- [Table of Contents](#table-of-contents)
+  - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
     - [Prerequisites:](#prerequisites)
   - [Installing and Setting up doctl](#installing-and-setting-up-doctl)
