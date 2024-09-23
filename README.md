@@ -53,6 +53,7 @@ When you run the authentication, it will ask for an API token.
 2. On the left menu, click API (this takes you to the "Applications & API" page under the Tokens tab).
 3. In the Personal access tokens section, click the Generate New Token button.
 4. You will receive your own personal access Token jsut like the screenshot below.
+
 ![personal access token](images/new%20personal%20token.png)
 
 ### Use the API token to grant account access to doctl
