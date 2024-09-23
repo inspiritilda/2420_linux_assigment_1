@@ -7,9 +7,10 @@
     - [Prerequisites:](#prerequisites)
   - [Installing and Setting up doctl](#installing-and-setting-up-doctl)
     - [Steps to Install doctl:](#steps-to-install-doctl)
-    - [Authenticate `doctl`:](#authenticate-doctl)
   - [Generating API token](#generating-api-token)
-  - [Use the API token to grant account access to doctl](#use-the-api-token-to-grant-account-access-to-doctl)
+    - [To generate a personal access token:](#to-generate-a-personal-access-token)
+    - [Use the API token to grant account access to doctl](#use-the-api-token-to-grant-account-access-to-doctl)
+    - [Authenticate `doctl`:](#authenticate-doctl)
   - [Validate that doctl is working](#validate-that-doctl-is-working)
   - [Configuring cloud-init](#configuring-cloud-init)
     - [Sample cloud-init Configuration File:](#sample-cloud-init-configuration-file)
@@ -42,22 +43,18 @@ On Arch Linux, install `doctl` with the pacman package manager. You can run:
 sudo pacman -S doctl
 ```
 
-### Authenticate `doctl`:
-After you have installed `doctl`, you will need to link it to your DigitalOcean account. To do that, run:
-
-```bash
-doctl auth init
-```
-
 ## Generating API token
-You will be prompted to enter your API token, which can be generated from the DigitalOcean control panel under API > Generate New Token.
+When you run the authentication, it will ask for an API token.
 
-To generate a personal access token, log in to the DigitalOcean Control Panel:
+### To generate a personal access token:
+1. Log-in to your DigitalOcean Control Panel.
+2. On the left menu, click API (this takes you to the "Applications & API" page under the Tokens tab).
+3. In the Personal access tokens section, click the Generate New Token button.
+4. You will receive your own personal access Token jsut like the screenshot below.
 
-1. In the left menu, click API, which takes you to the Applications & API page on the Tokens tab.
-2. In the Personal access tokens section, click the Generate New Token button.
+![personal access token](images/new%20personal%20token.png)
 
-## Use the API token to grant account access to doctl
+### Use the API token to grant account access to doctl
 Use the API token to grant `doctl` access to your DigitalOcean account. Pass in the token string when prompted by `doctl auth init`, and give this authentication context a name.
 ```bash
 doctl auth init --context <NAME>
@@ -67,6 +64,12 @@ Authentication contexts let you switch between multiple authenticated accounts. 
 ```bash
 doctl auth list
 doctl auth switch --context <NAME>
+```
+
+### Authenticate `doctl`:
+After you have installed `doctl`, you will need to link it to your DigitalOcean account. To do that, run:
+```bash
+doctl auth init
 ```
 
 ## Validate that doctl is working
