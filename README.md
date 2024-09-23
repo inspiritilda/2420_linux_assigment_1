@@ -189,32 +189,30 @@ Congratulations! You have successfully created an Arch Linux droplet on DigitalO
 By understanding these processes, you’re better equipped to manage and deploy servers in a cloud environment (Tung, 2020; Stallings & Brown, 2019; Limoncelli, Chalup, & Hogan, 2016).
 
 ## References
-- DigitalOcean. (n.d.). *How to create and manage SSH keys on DigitalOcean*. Retrieved from [https://www.digitalocean.com/docs/ssh/create-ssh-keys/](https://www.digitalocean.com/docs/ssh/create-ssh-keys/)
-
-- DigitalOcean. (n.d.). *How to use cloud-init to configure a droplet*. Retrieved from [https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/](https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/)
-
-- DigitalOcean. (n.d.). *How to Set Up and Use DigitalOcean Spaces with the DigitalOcean CLI*. Retrieved from [https://www.digitalocean.com/docs/spaces/how-to/using-doctl/](https://www.digitalocean.com/docs/spaces/how-to/using-doctl/)
-
-- DigitalOcean. (n.d.). *Understanding Cloud-Init and the Configuration Options*. Retrieved from [https://www.digitalocean.com/community/tutorials/understanding-cloud-init](https://www.digitalocean.com/community/tutorials/understanding-cloud-init)
-
 - Arch Linux. (n.d.). *Installation guide*. Retrieved from [https://wiki.archlinux.org/title/Installation_guide](https://wiki.archlinux.org/title/Installation_guide)
 
 - Arch Linux. (n.d.). *SSH Keys*. Retrieved from [https://wiki.archlinux.org/title/Secure_Shell#SSH_keys](https://wiki.archlinux.org/title/Secure_Shell#SSH_keys)
 
-- Sobel, M. (2020). *Learning Linux for iOS development: An introduction to Unix-based development for mobile applications*. Packt Publishing.
+- Canonical. (n.d.). *Cloud-init*. Retrieved from [https://cloud-init.readthedocs.io/en/latest/](https://cloud-init.readthedocs.io/en/latest/)
 
 - Chacon, S., & Straub, B. (2017). *Pro Git* (2nd ed.). Apress. Retrieved from [https://git-scm.com/book/en/v2](https://git-scm.com/book/en/v2)
 
-- Canonical. (n.d.). *Cloud-init*. Retrieved from [https://cloud-init.readthedocs.io/en/latest/](https://cloud-init.readthedocs.io/en/latest/)
+- DigitalOcean. (n.d.). *How to create and manage SSH keys on DigitalOcean*. Retrieved from [https://www.digitalocean.com/docs/ssh/create-ssh-keys/](https://www.digitalocean.com/docs/ssh/create-ssh-keys/)
 
-- Nash, M. (2021). *The Complete Guide to DigitalOcean*. Packt Publishing.
+- DigitalOcean. (n.d.). *How to Set Up and Use DigitalOcean Spaces with the DigitalOcean CLI*. Retrieved from [https://www.digitalocean.com/docs/spaces/how-to/using-doctl/](https://www.digitalocean.com/docs/spaces/how-to/using-doctl/)
 
-- Tung, L. (2020). *Cloud Computing: Concepts, Technology & Architecture*. Prentice Hall.
+- DigitalOcean. (n.d.). *How to use cloud-init to configure a droplet*. Retrieved from [https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/](https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/)
 
-- Stallings, W., & Brown, L. (2019). *Computer Security: Principles and Practice* (4th ed.). Pearson.
+- DigitalOcean. (n.d.). *Understanding Cloud-Init and the Configuration Options*. Retrieved from [https://www.digitalocean.com/community/tutorials/understanding-cloud-init](https://www.digitalocean.com/community/tutorials/understanding-cloud-init)
 
-- Limoncelli, T. A., Chalup, S. R., & Hogan, C. (2016). *The Practice of System and Network Administration* (3rd ed.). Addison-Wesley.
+- Janssens, D. (2018). *Learn Linux in 5 Days*. Independently published.
 
 - Kerrisk, M. (2010). *The Linux Programming Interface: A Linux and UNIX System Programming Handbook*. No Starch Press.
 
-- Janssens, D. (2018). *Learn Linux in 5 Days*. Independently published.
+- Nash, M. (2021). *The Complete Guide to DigitalOcean*. Packt Publishing.
+
+- Sobel, M. (2020). *Learning Linux for iOS development: An introduction to Unix-based development for mobile applications*. Packt Publishing.
+
+- Stallings, W., & Brown, L. (2019). *Computer Security: Principles and Practice* (4th ed.). Pearson.
+
+- Tung, L. (2020). *Cloud Computing: Concepts, Technology & Architecture*. Prentice Hall.
