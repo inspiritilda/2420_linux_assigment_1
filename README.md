@@ -1,6 +1,7 @@
-# Setting up a DigitalOcean droplet using doctl and cloud-init
+# Setting up a DigitalOcean droplet using `doctl` and `cloud-init`
+
 ## Table of Contents
-- [Setting up a DigitalOcean droplet using doctl and cloud-init](#setting-up-a-digitalocean-droplet-using-doctl-and-cloud-init)
+- [Setting up a DigitalOcean droplet using `doctl` and `cloud-init`](#setting-up-a-digitalocean-droplet-using-doctl-and-cloud-init)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
     - [Prerequisites:](#prerequisites)
@@ -21,6 +22,7 @@
   - [Verifying everything worked](#verifying-everything-worked)
   - [Uploading a custom image to DigitalOcean](#uploading-a-custom-image-to-digitalocean)
     - [Steps to Upload a Custom Image:](#steps-to-upload-a-custom-image)
+
 
 ## Introduction
 This guide will show you how to create an Arch Linux droplet on DigitalOcean using `doctl` command-line tool and `cloud-init`.
