@@ -12,13 +12,13 @@
     - [Use the API token to grant account access to doctl](#use-the-api-token-to-grant-account-access-to-doctl)
   - [Authenticate `doctl`:](#authenticate-doctl)
   - [Validate that doctl is working](#validate-that-doctl-is-working)
+  - [Setting up a SSH key](#setting-up-a-ssh-key)
+    - [Generate SSH Keys:](#generate-ssh-keys)
+    - [Add SSH Key to DigitalOcean:](#add-ssh-key-to-digitalocean)
   - [Configuring cloud-init](#configuring-cloud-init)
     - [Sample cloud-init Configuration File:](#sample-cloud-init-configuration-file)
   - [Uploading a custom image to DigitalOcean](#uploading-a-custom-image-to-digitalocean)
     - [Steps to Upload a Custom Image:](#steps-to-upload-a-custom-image)
-  - [Setting up a SSH key](#setting-up-a-ssh-key)
-    - [Generate SSH Keys:](#generate-ssh-keys)
-    - [Add SSH Key to DigitalOcean:](#add-ssh-key-to-digitalocean)
   - [Deploying the droplet](#deploying-the-droplet)
     - [Droplet Creation Command:](#droplet-creation-command)
   - [Verifying everything worked](#verifying-everything-worked)
@@ -79,6 +79,22 @@ Email                      Droplet Limit    Email Verified    UUID              
 sammy@example.org          10               true              3a56c5e109736b50e823eaebca85708ca0e5087c    active
 ```
 
+## Setting up a SSH key
+SSH keys are great for secure, passwordless access to your server.
+
+### Generate SSH Keys:
+To create a new SSH key pair on your local machine, run:
+```bash
+doctl compute ssh-key create <key-name>
+```
+* Make sure give your SSH a name by replacing `<key-name>`.
+
+### Add SSH Key to DigitalOcean:
+Next, to add your SSH key to DigitalOcean, use this command:
+```bash
+doctl compute ss-key
+```
+
 ## Configuring cloud-init
 `cloud-init` allows you to automate the initial setup of your droplet. We’ll use it to create a user, install some packages, and configure SSH access.
 
@@ -121,24 +137,6 @@ doctl compute image create <image-name> [flags]
 ```bash
 doctl compute image create "Example Image" --image-url "https://example.com/image.iso" --region nyc1
 ```
-
-## Setting up a SSH key
-SSH keys provide secure, passwordless authentication to your server.
-
-### Generate SSH Keys:
-To create a new SSH key pair on your local machine, run:
-```bash
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-```
-
-* `The -t rsa` flag specifies the RSA algorithm.
-* `The -b 4096` flag creates a 4096-bit key for enhanced security.
-* 
-You can find your public key at `~/.ssh/id_rsa.pub`. Copy this key so it can be added to your droplet.
-
-### Add SSH Key to DigitalOcean:
-Go to Settings > Security in your DigitalOcean account.
-Click Add SSH Key and paste the contents of your `id_rsa.pub` file.
 
 ## Deploying the droplet
 Now that everything is set up, you can deploy your Arch Linux droplet using doctl and the cloud-init configuration file.
