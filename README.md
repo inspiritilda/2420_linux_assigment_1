@@ -49,17 +49,17 @@ sudo pacman -S doctl
 When you run the authentication, it will ask for an API token.
 
 ### To generate a personal access token:
-1. Log-in to your DigitalOcean Control Panel.
-2. On the left menu, click API (this takes you to the "Applications & API" page under the Tokens tab).
-3. In the Personal access tokens section, click the Generate New Token button.
-4. You will receive your own personal access Token jsut like the screenshot below.
+  1. Log-in to your DigitalOcean Control Panel.
+  2. On the left menu, click API (this takes you to the "Applications & API" page under the Tokens tab).
+  3. In the Personal access tokens section, click the Generate New Token button.
+  4. You will receive your own personal access Token jsut like the screenshot below.
 
 ![personal access token](images/new%20personal%20token.png)
 
 ### Use the API token to grant account access to doctl
-Now that you have your API token, you can use it to link `doctl` to your DigitalOcean account. When you run `doctl auth init`, just enter the token when it asks for it and give this authentication context a name if you would like. It looks like this:
+Now that you have your API token, you can use it to link `doctl` to your DigitalOcean account. When you run `doctl auth init`, just enter the token when it asks for it. It looks like this:
 ```bash
-doctl auth init --context <NAME>
+doctl auth init
 ```
 ![validating token](images/validating%20token.png)
 
@@ -87,16 +87,15 @@ SSH keys are great for secure, passwordless access to your server (Arch Linux, n
 
 1. **Generate SSH Key Pair:**
     ```bash
-    ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+    ssh-keygen -t ed25519 -f ~/.ssh/do-key -C "your email address"
     ```
     This command generates a new SSH key pair. Follow the prompts to save it in the default location.
 
 2. **Add SSH Key to DigitalOcean:**
     Once your SSH key is generated, add it to your DigitalOcean account with:
     ```bash
-    doctl compute ssh-key create <key-name> --public-key-file ~/.ssh/id_rsa.pub
+    wl-copy < ~/.ssh/do-key.pub
     ```
-    Replace `<key-name>` with a descriptive name for your key.
 
 ### Understanding SSH Keys
 SSH (Secure Shell) keys are a pair of cryptographic keys used for authenticating secure connections. Unlike passwords, SSH keys provide a more secure method of authentication as they are not transmitted over the network, making them resistant to brute-force attacks (Sobel, 2020). By using SSH keys, you can log in to your server without the need for a password, enhancing security.
