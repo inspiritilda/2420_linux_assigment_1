@@ -1,8 +1,8 @@
 # Setting up a DigitalOcean droplet using `doctl` and `cloud-init`
 
-## Table of Contents
+# Table of Contents
 - [Setting up a DigitalOcean droplet using `doctl` and `cloud-init`](#setting-up-a-digitalocean-droplet-using-doctl-and-cloud-init)
-  - [Table of Contents](#table-of-contents)
+- [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
     - [Prerequisites:](#prerequisites)
   - [Installing and Setting up doctl](#installing-and-setting-up-doctl)
@@ -125,21 +125,22 @@ The YAML file for this tutorial defines:
 * Two commands that create an environment variable and configure the nginx server.
 
 ## Deploying the droplet
-Now that everything is set up, you can deploy your Arch Linux droplet using doctl and the cloud-init configuration file.
+Now that everything is configured, you're ready to deploy your Arch Linux droplet using `doctl` and the `cloud-init` configuration file.
 ### Droplet Creation Command:
+To create the droplets, run the following command:
 ``` bash
 doctl compute droplet create --image ubuntu-22-04-x64 --size s-1vcpu-1gb --region nyc1 --ssh-keys git-user --user-data-file <path-to-your-cloud-init-file> --wait first-droplet second-droplet
 ```
-* `doctl compute droplet create`: the command `doctl` requires to create droplets.
-* `--image ubuntu-22-04-x64`: The OS image used to create the Droplet. In this case the Droplets uses the Ubuntu 22.04 operating system.
-* `--size s-1vcpu-1gb`: The number of processors and the amount of RAM each Droplet has. In this case, each Droplet has one processor and 1 GB of RAM.
-* `--region nyc1`: The region to create the Droplets in. In this example, doctl deploys the Droplets into the NYC1 datacenter region.
-* `--ssh-keys`: The SSH keys to import into the Droplet from your DigitalOcean account. You can retrieve a list of available keys by running doctl compute ssh-key list.
-* `--user-data-file <path-to-your-cloud-init-file`: Specifies the path to your cloud-config.yaml file. For example, /Users/example-user/cloud-config.yaml.
-* `--wait`: Tells doctl to wait for the Droplets to finish deployment before accepting new commands.
-* `first-droplet second-droplet`: The names of the Droplets being deployed. You can deploy as many Droplets as you like by providing a name for each Droplet at the end of the command.
+Here is a breakdown of the command:
+* `--image ubuntu-22-04-x64`: This option specifies the operating system image for the droplets, which in this case is Ubuntu 22.04.
+* `--size s-1vcpu-1gb`: This specifies the resources for each droplet. Here, each droplet is allocated one virtual CPU and 1 GB of RAM.
+* `--region nyc1`: This option defines the region for deploying the droplets. In this example, the droplets will be created in the NYC1 datacenter.
+* `--ssh-keys`: This parameter allows you to import SSH keys into the droplet from your DigitalOcean account. You can list available keys using the command `doctl compute ssh-key list`.
+* `--user-data-file <path-to-your-cloud-init-file`: This specifies the path to your `cloud-config.yaml file`. For instance, it could look something like `/Users/example-user/cloud-config.yaml`.
+* `--wait`: This tells `doctl` to wait until the droplets are fully deployed before accepting any new commands.
+* `first-droplet second-droplet`: These are the names of the droplets being created. You can name as many droplets as you want by adding more names at the end of the command.
 
-Once you enter the command, the terminal prompt remains blank until the Droplets have finished deploying. This may take a few minutes. A successful deploy returns output that looks like this:
+After executing the command, the terminal will not display a prompt until the droplets finish deploying, which may take a few minutes. Once the deployment is successful, the output will resemble the following:
 ```bash
 ID           Name              Public IPv4       Private IPv4    Public IPv6    Memory    VCPUs    Disk    Region    Image               VPC UUID                                Status    Tags    Features                            Volumes
 311143987    second-droplet    203.0.113.199    203.0.113.4                     1024      1        25      nyc1      Ubuntu 22.04 x64    cfcbcc95-365a-4705-a18d-54abde1fc7b4    active            droplet_agent,private_networking
@@ -147,7 +148,7 @@ ID           Name              Public IPv4       Private IPv4    Public IPv6    
 ```
 
 ## Verifying everything worked
-After you’ve successfully deployed the Droplets, it’s time to check if the cloud-init configuration worked. You can log in to one of the Droplets using the username you defined in the cloud-config.yaml file. To do this, use the following OpenSSH command, making sure to replace the placeholder with your Droplet's public IPv4 address:
+After successfully deploying the droplets, it is important to check if the cloud-init configuration was executed properly. You can log in to one of the droplets using the username defined in the `cloud-config.yaml file`. To do this, you can use the OpenSSH command shown below. Make sure to replace the placeholder with the public IPv4 address of your droplet:
 ```bash
 ssh example-user@<your-droplet-ip-address>
 ```
@@ -155,6 +156,6 @@ If everything is set up correctly, your terminal prompt should change to somethi
 ```bash
 example-user@first-droplet:~$
 ```
-Now you're logged in, and you can explore the Droplet!
+At this point, you are logged in and can explore the droplet.
 
-To check if the nginx configuration worked, just paste one of the Droplet's public IP addresses into your web browser and hit Enter. You should see the nginx homepage, which will display the name of your Droplet and its IP address.
+To verify that the nginx configuration is functioning, simply copy one of the droplet's public IP addresses and paste it into your web browser, then press Enter. You should see the nginx homepage, which will display the name of your droplet along with its IP address. This indicates that your setup was successful.
