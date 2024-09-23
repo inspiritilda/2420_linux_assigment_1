@@ -6,7 +6,8 @@
   - [Introduction](#introduction)
     - [Prerequisites:](#prerequisites)
   - [Installing and Setting up doctl](#installing-and-setting-up-doctl)
-  - [Authenticate `doctl`:](#authenticate-doctl)
+    - [Steps to Install doctl:](#steps-to-install-doctl)
+    - [Authenticate `doctl`:](#authenticate-doctl)
   - [Generating API token](#generating-api-token)
   - [Use the API token to grant account access to doctl](#use-the-api-token-to-grant-account-access-to-doctl)
   - [Validate that doctl is working](#validate-that-doctl-is-working)
@@ -28,22 +29,21 @@ This guide will show you how to create an Arch Linux droplet on DigitalOcean usi
 We will go step by step to set up SSH keys for secure access, upload a custom Arch Linux image, and automate the setup process with `cloud-init`.
 
 ### Prerequisites:
-- You will need a DigitalOcean account.
-- Make sure `ssh` is installed on your local machine.
-- You should have a basic idea of how to use the Linux command line.
+- A DigitalOcean account.
+- `ssh` installed on your local machine.
+- A basic understanding of how to use the Linux command line.
 
 ##  Installing and Setting up doctl
-`doctl` is the official DigitalOcean CLI tool that allows you to manage your resources from the command line.
+`doctl` is the official DigitalOcean CLI tool, and it makes it super easy to manage everything right from your terminal.
 
-Steps to Install doctl:
-If you're using Arch Linux, you can install doctl using the pacman package manager:
-
+### Steps to Install doctl:
+On Arch Linux, install `doctl` with the pacman package manager. You can run:
 ```bash
 sudo pacman -S doctl
 ```
 
-## Authenticate `doctl`:
-Once installed, you need to authenticate doctl with your DigitalOcean account:
+### Authenticate `doctl`:
+After you have installed `doctl`, you will need to link it to your DigitalOcean account. To do that, run:
 
 ```bash
 doctl auth init
