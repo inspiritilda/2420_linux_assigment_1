@@ -11,7 +11,7 @@
     - [To generate a personal access token:](#to-generate-a-personal-access-token)
     - [Use the API token to grant account access to doctl](#use-the-api-token-to-grant-account-access-to-doctl)
   - [Authenticate `doctl`:](#authenticate-doctl)
-  - [Validate that doctl is working](#validate-that-doctl-is-working)
+    - [Validate that doctl is working](#validate-that-doctl-is-working)
   - [Setting up a SSH key](#setting-up-a-ssh-key)
     - [Understanding SSH Keys](#understanding-ssh-keys)
   - [Uploading a custom image to DigitalOcean](#uploading-a-custom-image-to-digitalocean)
@@ -70,7 +70,7 @@ doctl auth init
 ```
 ![authenticate doctl](images/authenticate%20doctl.png)
 
-## Validate that doctl is working
+### Validate that doctl is working
 To confirm that you have successfully linked `doctl` to your account, you can look at your account details by running:
 ```bash
 doctl account get
@@ -85,6 +85,9 @@ sammy@example.org          10               true              3a56c5e109736b50e8
 ## Setting up a SSH key
 SSH keys are great for secure, passwordless access to your server (Arch Linux, n.d.).
 
+### Understanding SSH Keys
+SSH (Secure Shell) keys are a pair of cryptographic keys used for authenticating secure connections. Unlike passwords, SSH keys provide a more secure method of authentication as they are not transmitted over the network, making them resistant to brute-force attacks (Sobel, 2020). By using SSH keys, you can log in to your server without the need for a password, enhancing security.
+
 1. **Generate SSH Key Pair:**
     ```bash
     ssh-keygen -t ed25519 -f ~/.ssh/do-key -C "your email address"
@@ -96,9 +99,6 @@ SSH keys are great for secure, passwordless access to your server (Arch Linux, n
     ```bash
     doctl compute ssh-key create <key-name> --public-key-file ~/.ssh/<your-key>.pub
     ```
-
-### Understanding SSH Keys
-SSH (Secure Shell) keys are a pair of cryptographic keys used for authenticating secure connections. Unlike passwords, SSH keys provide a more secure method of authentication as they are not transmitted over the network, making them resistant to brute-force attacks (Sobel, 2020). By using SSH keys, you can log in to your server without the need for a password, enhancing security.
 
 ## Uploading a custom image to DigitalOcean
 To create a droplet running Arch Linux, you first need to upload a custom Arch Linux image to your DigitalOcean account (DigitalOcean, n.d.).
