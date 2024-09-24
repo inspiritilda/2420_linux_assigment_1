@@ -13,6 +13,7 @@
   - [Authenticate `doctl`:](#authenticate-doctl)
   - [Validate that doctl is working](#validate-that-doctl-is-working)
   - [Setting up a SSH key](#setting-up-a-ssh-key)
+    - [Generate SSH Key Pair:](#generate-ssh-key-pair)
     - [Understanding SSH Keys](#understanding-ssh-keys)
   - [Uploading a custom image to DigitalOcean](#uploading-a-custom-image-to-digitalocean)
     - [Steps to Upload a Custom Image:](#steps-to-upload-a-custom-image)
@@ -85,17 +86,11 @@ sammy@example.org          10               true              3a56c5e109736b50e8
 ## Setting up a SSH key
 SSH keys are great for secure, passwordless access to your server (Arch Linux, n.d.).
 
-1. **Generate SSH Key Pair:**
-    ```bash
-    ssh-keygen -t ed25519 -f ~/.ssh/do-key -C "your email address"
-    ```
-    This command generates a new SSH key pair. Follow the prompts to save it in the default location.
-
-2. **Add SSH Key to DigitalOcean:**
-    Once your SSH key is generated, add it to your DigitalOcean account with:
-    ```bash
-    wl-copy < ~/.ssh/do-key.pub
-    ```
+### Generate SSH Key Pair:
+This command generates a new SSH key pair. Follow the prompts to save it in the default location.
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/do-key -C "your email address"
+```
 
 ### Understanding SSH Keys
 SSH (Secure Shell) keys are a pair of cryptographic keys used for authenticating secure connections. Unlike passwords, SSH keys provide a more secure method of authentication as they are not transmitted over the network, making them resistant to brute-force attacks (Sobel, 2020). By using SSH keys, you can log in to your server without the need for a password, enhancing security.
