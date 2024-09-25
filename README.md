@@ -131,9 +131,12 @@ runcmd:
   * `shell: /bin/bash` sets the user's shell to `bash`, which is the default shell for most Linux distributions and provides a command-line interface.
   * `sudo: ['ALL=(ALL) NOPASSWD:ALL']` grants this user root (administrator) privileges without needing to enter a password each time they use the `sudo` command. This can be useful for automating administrative tasks.
   * `ssh_import_id allows` the system to import SSH keys from your GitHub account. In this case, it fetches the public SSH key associated with `<your-GitHub-username>`. This allows secure, passwordless login using the key stored on GitHub.
-* 
-* 
-* 
+* `disable_root: true`: This line disables the root user account, which is a critical security measure.
+* `packages`: This section defines any packages you want to install on the droplet during its initialization.
+  * In this example, `nginx` (a web server) is listed under `packages`, which means that `nginx` will be automatically installed when the droplet is created. This saves you the effort of manually installing it after deployment and ensures that your server is ready to serve web content as soon as it's initialized.
+* `runcmd`: This section defines a set of commands to be run once the droplet has been initialized.
+  * The first command, `export PUBLIC_IPV4=$(curl -s http://169.254.169.254/metadata/v1/interfaces/public/0/ipv4/address)`, retrieves the droplet's public IPv4 address using the metadata service. The `curl` command makes an HTTP request to a special IP address (169.254.169.254) that provides information about the droplet, and the IP address is stored in the environment variable `PUBLIC_IPV4`.
+  * The second command, `echo Droplet: $(hostname), IP Address: $PUBLIC_IPV4 > /var/www/html/index.html`, creates a simple HTML file that displays the droplet's hostname and IP address. The file is saved at `/var/www/html/index.html`, which is the default directory served by `nginx`. When you visit the droplet's IP address in a browser, the web page will display this information, confirming that the server is running correctly.
 
 ## Deploying the droplet
 Now that everything is configured, you're ready to deploy your Arch Linux droplet using `doctl` and the `cloud-init` configuration file.
@@ -195,22 +198,8 @@ By understanding these processes, you’re better equipped to manage and deploy 
 
 - DigitalOcean. (n.d.). *How to create and manage SSH keys on DigitalOcean*. Retrieved from [https://www.digitalocean.com/docs/ssh/create-ssh-keys/](https://www.digitalocean.com/docs/ssh/create-ssh-keys/)
 
-- DigitalOcean. (n.d.). *How to Set Up and Use DigitalOcean Spaces with the DigitalOcean CLI*. Retrieved from [https://www.digitalocean.com/docs/spaces/how-to/using-doctl/](https://www.digitalocean.com/docs/spaces/how-to/using-doctl/)
+- DigitalOcean. (n.d.). *How to Perform Initial Server Configuration with Cloud-Init*. Retrieved from [https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup](https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup)
 
 - DigitalOcean. (n.d.). *How to use cloud-init to configure a droplet*. Retrieved from [https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/](https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/)
 
-- DigitalOcean. (n.d.). *How to Perform Initial Server Configuration with Cloud-Init*. Retrieved from [https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup](https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup)
-
-- DigitalOcean. (n.d.). *Understanding Cloud-Init and the Configuration Options*. Retrieved from [https://www.digitalocean.com/community/tutorials/understanding-cloud-init](https://www.digitalocean.com/community/tutorials/understanding-cloud-init)
-
-- Janssens, D. (2018). *Learn Linux in 5 Days*. Independently published.
-
-- Kerrisk, M. (2010). *The Linux Programming Interface: A Linux and UNIX System Programming Handbook*. No Starch Press.
-
-- Nash, M. (2021). *The Complete Guide to DigitalOcean*. Packt Publishing.
-
 - Sobel, M. (2020). *Learning Linux for iOS development: An introduction to Unix-based development for mobile applications*. Packt Publishing.
-
-- Stallings, W., & Brown, L. (2019). *Computer Security: Principles and Practice* (4th ed.). Pearson.
-
-- Tung, L. (2020). *Cloud Computing: Concepts, Technology & Architecture*. Prentice Hall.
