@@ -14,7 +14,7 @@
   - [Setting up a SSH key](#setting-up-a-ssh-key)
     - [Understanding SSH Keys](#understanding-ssh-keys)
     - [Generating SSH Key Pair](#generating-ssh-key-pair)
-    - [Adding SSH Key to DigitalOcean:](#adding-ssh-key-to-digitalocean)
+    - [Adding SSH Key to DigitalOcean](#adding-ssh-key-to-digitalocean)
   - [Configuring `cloud-init`](#configuring-cloud-init)
     - [What is `cloud-init`?](#what-is-cloud-init)
     - [Sample `cloud-init` Configuration File](#sample-cloud-init-configuration-file)
@@ -110,7 +110,7 @@ Here's a breakdown of the command:
 - `-f ~/.ssh/do-key`: This option specifies the file path where the generated SSH key pair will be saved. `~/.ssh/do-key` means the key will be stored in the `.ssh` directory in the user's home directory with the base name `do-key`. The private key will be saved as `do-key`, and the public key will be saved as `do-key.pub`.
 - `-C "your email address"`: This option adds a comment to the key, which typically includes the user's email address. This comment helps identify the key later, especially if multiple keys are in use. 
 
-### Adding SSH Key to DigitalOcean:
+### Adding SSH Key to DigitalOcean
 Once your SSH key is generated, add it to your DigitalOcean account with:
 ```bash
 doctl compute ssh-key create <key-name> --public-key-file ~/.ssh/<your-key>.pub
