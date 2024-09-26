@@ -10,7 +10,7 @@
     - [Generating API token](#generating-api-token)
       - [To generate a personal access token:](#to-generate-a-personal-access-token)
     - [Use the API token to grant account access to doctl](#use-the-api-token-to-grant-account-access-to-doctl)
-  - [Authenticate `doctl`:](#authenticate-doctl)
+    - [Authenticate `doctl`:](#authenticate-doctl)
     - [Validate that doctl is working](#validate-that-doctl-is-working)
   - [Setting up a SSH key](#setting-up-a-ssh-key)
     - [Understanding SSH Keys](#understanding-ssh-keys)
@@ -51,7 +51,7 @@ Here's a breakdown of the command:
 - `pacman`: This is the package manager for Arch Linux. It is used to install, remove, and manage software packages on Arch-based systems.
 - `-S`: This option tells `pacman` to synchronize packages, specifically to install the package specified next.
 - `doctl`: This is the name of the package you want to install. In this case, it refers to the official DigitalOcean command-line tool used for managing resources on DigitalOcean.
-- 
+
 ![installing doctl](images/installing%20doctl.png)
 
 ### Generating API token
@@ -79,7 +79,7 @@ Here's a breakdown of the command:
 
 ![validating token](images/validating%20token.png)
 
-## Authenticate `doctl`:
+### Authenticate `doctl`:
 Once you have installed `doctl`, you will need to link it to your DigitalOcean account. To do that, run:
 ```bash
 doctl auth init
