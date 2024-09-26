@@ -4,24 +4,24 @@
 - [Setting up a DigitalOcean droplet using `doctl` and `cloud-init`](#setting-up-a-digitalocean-droplet-using-doctl-and-cloud-init)
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
-    - [Prerequisites:](#prerequisites)
+    - [Prerequisites](#prerequisites)
   - [Installing and Setting up `doctl`](#installing-and-setting-up-doctl)
-    - [To Install `doctl`:](#to-install-doctl)
+    - [To Install `doctl`](#to-install-doctl)
     - [Generating API token](#generating-api-token)
-      - [To generate a personal access token:](#to-generate-a-personal-access-token)
+      - [To generate a personal access token](#to-generate-a-personal-access-token)
     - [Using the API token to grant account access to `doctl`](#using-the-api-token-to-grant-account-access-to-doctl)
     - [Validating `doctl` is working](#validating-doctl-is-working)
   - [Setting up a SSH key](#setting-up-a-ssh-key)
     - [Understanding SSH Keys](#understanding-ssh-keys)
-    - [Generating SSH Key Pair:](#generating-ssh-key-pair)
+    - [Generating SSH Key Pair](#generating-ssh-key-pair)
     - [Adding SSH Key to DigitalOcean:](#adding-ssh-key-to-digitalocean)
   - [Configuring `cloud-init`](#configuring-cloud-init)
     - [What is `cloud-init`?](#what-is-cloud-init)
-    - [Sample `cloud-init` Configuration File:](#sample-cloud-init-configuration-file)
-    - [Breakdown of Each Section:](#breakdown-of-each-section)
+    - [Sample `cloud-init` Configuration File](#sample-cloud-init-configuration-file)
+    - [Breakdown of Each Section](#breakdown-of-each-section)
   - [Deploying the droplet](#deploying-the-droplet)
-    - [Droplet Creation Command:](#droplet-creation-command)
-    - [Breakdown of Each Section:](#breakdown-of-each-section-1)
+    - [Droplet Creation Command](#droplet-creation-command)
+    - [Breakdown of Each Section](#breakdown-of-each-section-1)
   - [Verifying everything worked](#verifying-everything-worked)
   - [References](#references)
 
@@ -29,7 +29,7 @@
 This guide will show you how to create an Arch Linux droplet on DigitalOcean using `doctl` command-line tool and `cloud-init` (DigitalOcean, n.d.).
 We will go step by step to set up SSH keys for secure access, upload a custom Arch Linux image, and automate the setup process with `cloud-init`.
 
-### Prerequisites:
+### Prerequisites
 - A DigitalOcean account.
 - `ssh` installed on your local machine.
 - A basic understanding of how to use the Linux command line.
@@ -38,7 +38,7 @@ We will go step by step to set up SSH keys for secure access, upload a custom Ar
 ## Installing and Setting up `doctl`
 `doctl` is the official DigitalOcean CLI tool, and it makes it super easy to manage everything right from your terminal (DigitalOcean, n.d.).
 
-### To Install `doctl`:
+### To Install `doctl`
 On Arch Linux, install `doctl` with the pacman package manager. You can run:
 ```bash
 sudo pacman -S doctl
@@ -57,7 +57,7 @@ The screenshot above shows the installation of `doctl`.
 ### Generating API token
 When you run the authentication, it will ask for an API token. This is the only step that needs to be done outside the Arch Linux droplet.
 
-#### To generate a personal access token:
+#### To generate a personal access token
   1. Log-in to your DigitalOcean Control Panel.
   2. On the left menu, click API (this takes you to the "Applications & API" page under the Tokens tab).
   3. In the Personal access tokens section, click the Generate New Token button.
@@ -98,7 +98,7 @@ If successful, the output looks like:
 ### Understanding SSH Keys
 Secure Shell keys are great for secure, passwordless access to your server (Arch Linux, n.d.). SSH keys are a pair of cryptographic keys used for authenticating secure connections. Unlike passwords, SSH keys provide a more secure method of authentication as they are not transmitted over the network, making them resistant to brute-force attacks (Sobel, 2020). By using SSH keys, you can log in to your server without the need for a password, enhancing security.
 
-### Generating SSH Key Pair:
+### Generating SSH Key Pair
 ```bash
 ssh-keygen -t ed25519 -f ~/.ssh/do-key -C "your email address"
 ```
@@ -126,7 +126,7 @@ Here’s a breakdown of the command:
 ### What is `cloud-init`?
 `cloud-init` is a tool used in cloud environments to automate the initial setup of virtual machine (Canonical, n.d.; DigitalOcean, n.d.). It allows users to configure settings like network configuration, user creation, and package installation during the first boot of the instance (Canonical, n.d.; Cloud-init, n.d.). This automation reduces manual setup time and ensures consistency across deployments.
 
-### Sample `cloud-init` Configuration File:
+### Sample `cloud-init` Configuration File
 After you upload your public SSH key to your DigitalOcean account, create a file named `cloud-config.yml` with the following content:
 ```bash
 #cloud-config
@@ -152,7 +152,7 @@ packages:
 disable_root: true
 ```
 
-### Breakdown of Each Section:
+### Breakdown of Each Section
 * `users`: This section specifies the user accounts to be created on the droplet.
 * `- name: user-name`: Creates a user account with the specific username(`user-name`). This comment indicates that this should be replaced with the desired username.
 * `primary_group: group-name`: Assigns the specified primary group to the user. This should be changed to the desired group name. The primary group determines the default group the user belongs to.
@@ -175,12 +175,12 @@ disable_root: true
 ## Deploying the droplet
 Now that everything is configured, you're ready to deploy your Arch Linux droplet using `doctl` and the `cloud-init` configuration file.
 
-### Droplet Creation Command:
+### Droplet Creation Command
 To create the droplets, run the following command:
 ``` bash
 doctl compute droplet create --image arch-linux-2024-01-01 --size s-1vcpu-1gb --region nyc1 --ssh-keys git-user --user-data-file <path-to-your-cloud-init-file> --wait first-droplet second-droplet
 ```
-### Breakdown of Each Section:
+### Breakdown of Each Section
 * `doctl compute droplet create`: This is the base command used to create a new droplet.
 * `--image arch-linux-2024-01-01`: This option specifies the operating system image for the droplets, which in this case is arch-linux-2024-01-01.
 * `--size s-1vcpu-1gb`: This specifies the resources for each droplet. Here, each droplet is allocated one virtual CPU and 1 GB of RAM.
