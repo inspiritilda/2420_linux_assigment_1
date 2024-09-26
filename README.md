@@ -7,21 +7,26 @@
     - [Prerequisites](#prerequisites)
   - [Installing and Setting up `doctl`](#installing-and-setting-up-doctl)
     - [To Install `doctl`](#to-install-doctl)
+      - [Here's a breakdown of the command:](#heres-a-breakdown-of-the-command)
     - [Generating API token](#generating-api-token)
       - [To generate a personal access token](#to-generate-a-personal-access-token)
     - [Using the API token to grant account access to `doctl`](#using-the-api-token-to-grant-account-access-to-doctl)
+      - [Here's a breakdown of the command:](#heres-a-breakdown-of-the-command-1)
     - [Validating `doctl` is working](#validating-doctl-is-working)
+      - [Here's a breakdown of the command:](#heres-a-breakdown-of-the-command-2)
   - [Setting up a SSH key](#setting-up-a-ssh-key)
     - [Understanding SSH Keys](#understanding-ssh-keys)
     - [Generating SSH Key Pair](#generating-ssh-key-pair)
+      - [Here's a breakdown of the command:](#heres-a-breakdown-of-the-command-3)
     - [Adding SSH Key to DigitalOcean](#adding-ssh-key-to-digitalocean)
+      - [Here’s a breakdown of the command:](#heres-a-breakdown-of-the-command-4)
   - [Configuring `cloud-init`](#configuring-cloud-init)
     - [What is `cloud-init`?](#what-is-cloud-init)
     - [Sample `cloud-init` Configuration File](#sample-cloud-init-configuration-file)
-    - [Breakdown of Each Section](#breakdown-of-each-section)
+      - [Here’s a breakdown of the command:](#heres-a-breakdown-of-the-command-5)
   - [Deploying the droplet](#deploying-the-droplet)
     - [Droplet Creation Command](#droplet-creation-command)
-    - [Breakdown of Each Section](#breakdown-of-each-section-1)
+      - [Here’s a breakdown of the command:](#heres-a-breakdown-of-the-command-6)
   - [Verifying everything worked](#verifying-everything-worked)
   - [References](#references)
 
@@ -45,7 +50,7 @@ sudo pacman -S doctl
 ```
 This installs the `doctl` package on your Arch Linux system using the pacman package manager.
 
-Here's a breakdown of the command:
+#### Here's a breakdown of the command:
 - `sudo`: This command runs the following command with superuser (administrator) privileges. It is necessary for installing software and making system-level changes.
 - `pacman`: This is the package manager for Arch Linux. It is used to install, remove, and manage software packages on Arch-based systems.
 - `-S`: This option tells `pacman` to synchronize packages, specifically to install the package specified next.
@@ -71,7 +76,7 @@ doctl auth init
 ```
 This command initializes the `doctl` tool by linking it to your DigitalOcean account, prompting you to enter your API token for authentication.
 
-Here's a breakdown of the command:
+#### Here's a breakdown of the command:
 - `doctl`: This is the command-line tool for interacting with DigitalOcean's API. It allows users to manage DigitalOcean resources directly from the terminal.
 - `auth`: This is a subcommand within `doctl` that deals with authentication. It manages how `doctl` connects to your DigitalOcean account.
 - `init`: This command initializes the authentication process. It prompts you to enter your DigitalOcean API token, linking `doctl` to your account for subsequent operations.
@@ -86,7 +91,7 @@ doctl account get
 ```
 This command retrieves and displays details about your DigitalOcean account, including the email associated with the account, droplet limits, and account status.
 
-Here's a breakdown of the command:
+#### Here's a breakdown of the command:
 - `doctl`: This is the command-line interface (CLI) tool for DigitalOcean, used to manage and interact with DigitalOcean resources from the terminal.
 - `account`: This subcommand refers to actions related to your DigitalOcean account, providing details and information about it.
 - `get`: This command retrieves information about the currently authenticated account. It displays details such as the email address associated with the account, the droplet limit, and whether the email has been verified.
@@ -104,7 +109,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/do-key -C "your email address"
 ```
 This command generates a new SSH key pair. Follow the prompts to save it in the default location.
 
-Here's a breakdown of the command:
+#### Here's a breakdown of the command:
 - `ssh-keygen`: This is the command used to generate a new SSH key pair.
   *`-t ed25519`: This option specifies the type of key to create. In this case, `ed25519` is chosen for its enhanced security and performance compared to older algorithms like RSA.
 - `-f ~/.ssh/do-key`: This option specifies the file path where the generated SSH key pair will be saved. `~/.ssh/do-key` means the key will be stored in the `.ssh` directory in the user's home directory with the base name `do-key`. The private key will be saved as `do-key`, and the public key will be saved as `do-key.pub`.
@@ -115,7 +120,7 @@ Once your SSH key is generated, add it to your DigitalOcean account with:
 ```bash
 doctl compute ssh-key create <key-name> --public-key-file ~/.ssh/<your-key>.pub
 ```
-Here’s a breakdown of the command:
+#### Here’s a breakdown of the command:
 - `doctl compute ssh-key create`: This is the command to create a new SSH key in your DigitalOcean account using the `doctl` command-line tool, specifically for the compute resource.
 - `<key-name>`: This is a placeholder for the name you want to assign to the SSH key in DigitalOcean. You should replace `<key-name>` with a descriptive name (e.g., `my-ssh-key`) that helps identify this key.
 - `--public-key-file ~/.ssh/<your-key>.pub*: This option specifies the path to the public SSH key file that you want to upload to DigitalOcean. 
@@ -152,7 +157,7 @@ packages:
 disable_root: true
 ```
 
-### Breakdown of Each Section
+#### Here’s a breakdown of the command:
 * `users`: This section specifies the user accounts to be created on the droplet.
 * `- name: user-name`: Creates a user account with the specific username(`user-name`). This comment indicates that this should be replaced with the desired username.
 * `primary_group: group-name`: Assigns the specified primary group to the user. This should be changed to the desired group name. The primary group determines the default group the user belongs to.
@@ -180,7 +185,7 @@ To create the droplets, run the following command:
 ``` bash
 doctl compute droplet create --image arch-linux-2024-01-01 --size s-1vcpu-1gb --region nyc1 --ssh-keys git-user --user-data-file <path-to-your-cloud-init-file> --wait first-droplet second-droplet
 ```
-### Breakdown of Each Section
+#### Here’s a breakdown of the command:
 * `doctl compute droplet create`: This is the base command used to create a new droplet.
 * `--image arch-linux-2024-01-01`: This option specifies the operating system image for the droplets, which in this case is arch-linux-2024-01-01.
 * `--size s-1vcpu-1gb`: This specifies the resources for each droplet. Here, each droplet is allocated one virtual CPU and 1 GB of RAM.
