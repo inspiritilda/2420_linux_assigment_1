@@ -111,7 +111,6 @@ SSH (Secure Shell) keys are a pair of cryptographic keys used for authenticating
 After you upload your public SSH key to your DigitalOcean account, create a file named `cloud-config.yml` with the following content:
 ```bash
 #cloud-config
-#cloud-config
 users:
   - name: user-name #change me
     primary_group: group-name #change me
