@@ -6,12 +6,12 @@
   - [Introduction](#introduction)
     - [Prerequisites:](#prerequisites)
   - [Installing and Setting up `doctl`](#installing-and-setting-up-doctl)
-    - [Steps to Install `doctl`:](#steps-to-install-doctl)
+    - [Installing `doctl`:](#installing-doctl)
     - [Generating API token](#generating-api-token)
       - [To generate a personal access token:](#to-generate-a-personal-access-token)
     - [Use the API token to grant account access to doctl](#use-the-api-token-to-grant-account-access-to-doctl)
     - [Authenticate `doctl`:](#authenticate-doctl)
-    - [Validate that doctl is working](#validate-that-doctl-is-working)
+    - [Validate that`doctl` is working](#validate-thatdoctl-is-working)
   - [Setting up a SSH key](#setting-up-a-ssh-key)
     - [Understanding SSH Keys](#understanding-ssh-keys)
     - [Generate SSH Key Pair:](#generate-ssh-key-pair)
@@ -39,7 +39,7 @@ We will go step by step to set up SSH keys for secure access, upload a custom Ar
 ## Installing and Setting up `doctl`
 `doctl` is the official DigitalOcean CLI tool, and it makes it super easy to manage everything right from your terminal (DigitalOcean, n.d.).
 
-### Steps to Install `doctl`:
+### Installing `doctl`:
 On Arch Linux, install `doctl` with the pacman package manager. You can run:
 ```bash
 sudo pacman -S doctl
@@ -86,12 +86,17 @@ doctl auth init
 ```
 ![authenticate doctl](images/authenticate%20doctl.png)
 
-### Validate that doctl is working
+### Validate that`doctl` is working
 To confirm that you have successfully linked `doctl` to your account, you can look at your account details by running:
 ```bash
 doctl account get
 ```
 This command retrieves and displays details about your DigitalOcean account, including the email associated with the account, droplet limits, and account status.
+
+Here's a breakdown of the command:
+- `doctl`: This is the command-line interface (CLI) tool for DigitalOcean, used to manage and interact with DigitalOcean resources from the terminal.
+- `account`: This subcommand refers to actions related to your DigitalOcean account, providing details and information about it.
+- `get`: This command retrieves information about the currently authenticated account. It displays details such as the email address associated with the account, the droplet limit, and whether the email has been verified.
 
 If successful, the output looks like:
 ```bash
@@ -124,9 +129,6 @@ Once your SSH key is generated, add it to your DigitalOcean account with:
 doctl compute ssh-key create <key-name> --public-key-file ~/.ssh/<your-key>.pub
 ```
 Here’s a breakdown of the command:
-```bash
-doctl compute ssh-key create <key-name> --public-key-file ~/.ssh/<your-key>.pub
-```
 - `doctl compute ssh-key create`: This is the command to create a new SSH key in your DigitalOcean account using the `doctl` command-line tool, specifically for the compute resource.
 - `<key-name>`: This is a placeholder for the name you want to assign to the SSH key in DigitalOcean. You should replace `<key-name>` with a descriptive name (e.g., `my-ssh-key`) that helps identify this key.
 - `--public-key-file ~/.ssh/<your-key>.pub*: This option specifies the path to the public SSH key file that you want to upload to DigitalOcean. 
