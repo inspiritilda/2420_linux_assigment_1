@@ -189,10 +189,32 @@ At this point, you are logged in and can explore the droplet.
 To verify that the nginx configuration is functioning, simply copy one of the droplet's public IP addresses and paste it into your web browser, then press Enter. You should see the nginx homepage, which will display the name of your droplet along with its IP address. This indicates that your setup was successful.
 
 ## References
-- Arch Linux. (n.d.). *SSH Keys*. Retrieved from [https://wiki.archlinux.org/title/Secure_Shell#SSH_keys](https://wiki.archlinux.org/title/Secure_Shell#SSH_keys)
+1. Arch Linux. (n.d.). *Installation guide*. Retrieved from [https://wiki.archlinux.org/title/Installation_guide](https://wiki.archlinux.org/title/Installation_guide)  
+   In-text citation: (Arch Linux, n.d.)
 
-- Canonical. (n.d.). *Cloud-init*. Retrieved from [https://cloud-init.readthedocs.io/en/latest/](https://cloud-init.readthedocs.io/en/latest/)
+2. Arch Linux. (n.d.). *SSH keys*. Retrieved from [https://wiki.archlinux.org/title/Secure_Shell#SSH_keys](https://wiki.archlinux.org/title/Secure_Shell#SSH_keys)  
+   In-text citation: (Arch Linux, n.d.)
 
-- Cloud-init. (n.d.). *cloud-init docs*. Retrieved from [https://docs.cloud-init.io/en/latest/index.html](https://docs.cloud-init.io/en/latest/index.html)
+3. Canonical. (n.d.). *Cloud-init*. Retrieved from [https://cloud-init.readthedocs.io/en/latest/](https://cloud-init.readthedocs.io/en/latest/)  
+   In-text citation: (Canonical, n.d.)
 
-- Sobel, M. (2020). *Learning Linux for iOS development: An introduction to Unix-based development for mobile applications*. Packt Publishing.
+4. Chacon, S., & Straub, B. (2017). *Pro Git* (2nd ed.). Apress. Retrieved from [https://git-scm.com/book/en/v2](https://git-scm.com/book/en/v2)  
+   In-text citation: (Chacon & Straub, 2017)
+
+5. DigitalOcean. (n.d.-a). *How to create and manage SSH keys on DigitalOcean*. Retrieved from [https://www.digitalocean.com/docs/ssh/create-ssh-keys/](https://www.digitalocean.com/docs/ssh/create-ssh-keys/)  
+   In-text citation: (DigitalOcean, n.d.-a)
+
+6. DigitalOcean. (n.d.-b). *How to use cloud-init to configure a droplet*. Retrieved from [https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/](https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/)  
+   In-text citation: (DigitalOcean, n.d.-b)
+
+7. DigitalOcean. (n.d.-c). *How to Perform Initial Server Configuration with Cloud-Init*. Retrieved from [https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup](https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup)  
+   In-text citation: (DigitalOcean, n.d.-c)
+
+8. GNU. (n.d.). *Bash completion*. Retrieved from [https://bash-completion.alioth.debian.org/](https://bash-completion.alioth.debian.org/)  
+   In-text citation: (GNU, n.d.)
+
+9. OpenSSH. (n.d.). *SSH key management*. Retrieved from [https://www.openssh.com/manual.html](https://www.openssh.com/manual.html)  
+   In-text citation: (OpenSSH, n.d.)
+
+10. Sobel, M. (2020). *Learning Linux for iOS development: An introduction to Unix-based development for mobile applications*. Packt Publishing.  
+    In-text citation: (Sobel, 2020)
