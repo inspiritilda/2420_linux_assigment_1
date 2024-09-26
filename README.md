@@ -228,13 +228,13 @@ To verify that the `nginx` configuration is functioning, simply copy one of the 
 4. Chacon, S., & Straub, B. (2017). *Pro Git* (2nd ed.). Apress. Retrieved from [https://git-scm.com/book/en/v2](https://git-scm.com/book/en/v2)  
    In-text citation: (Chacon & Straub, 2017)
 
-5. DigitalOcean. (n.d.-a). *How to create and manage SSH keys on DigitalOcean*. Retrieved from [https://www.digitalocean.com/docs/ssh/create-ssh-keys/](https://www.digitalocean.com/docs/ssh/create-ssh-keys/)  
+5. DigitalOcean. (n.d.). *How to create and manage SSH keys on DigitalOcean*. Retrieved from [https://www.digitalocean.com/docs/ssh/create-ssh-keys/](https://www.digitalocean.com/docs/ssh/create-ssh-keys/)  
    In-text citation: (DigitalOcean, n.d.-a)
 
-6. DigitalOcean. (n.d.-b). *How to use cloud-init to configure a droplet*. Retrieved from [https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/](https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/)  
+6. DigitalOcean. (n.d.). *How to use cloud-init to configure a droplet*. Retrieved from [https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/](https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/)  
    In-text citation: (DigitalOcean, n.d.-b)
 
-7. DigitalOcean. (n.d.-c). *How to Perform Initial Server Configuration with Cloud-Init*. Retrieved from [https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup](https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup)  
+7. DigitalOcean. (n.d.). *How to Perform Initial Server Configuration with Cloud-Init*. Retrieved from [https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup](https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup)  
    In-text citation: (DigitalOcean, n.d.-c)
 
 8. GNU. (n.d.). *Bash completion*. Retrieved from [https://bash-completion.alioth.debian.org/](https://bash-completion.alioth.debian.org/)  
