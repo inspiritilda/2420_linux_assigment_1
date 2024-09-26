@@ -112,8 +112,8 @@ After you upload your public SSH key to your DigitalOcean account, create a file
 ```bash
 #cloud-config
 users:
-  - name: user-name #change me
-    primary_group: group-name #change me
+  - name: user-name
+    primary_group: group-name
     groups: wheel
     shell: /bin/bash
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
@@ -134,17 +134,10 @@ disable_root: true
 ```
 
 ### Breakdown of Each Section:
-* `users`: This section configures the user account on the droplet.
-  * The line `name: example-user` creates a user named `example-user`.
-  * `shell: /bin/bash` sets the user's shell to `bash`, which is the default shell for most Linux distributions and provides a command-line interface.
-  * `sudo: ['ALL=(ALL) NOPASSWD:ALL']` grants this user root (administrator) privileges without needing to enter a password each time they use the `sudo` command. This can be useful for automating administrative tasks.
-  * `ssh_import_id allows` the system to import SSH keys from your GitHub account. In this case, it fetches the public SSH key associated with `<your-GitHub-username>`. This allows secure, passwordless login using the key stored on GitHub.
-* `disable_root: true`: This line disables the root user account, which is a critical security measure.
-* `packages`: This section defines any packages you want to install on the droplet during its initialization.
-  * In this example, `nginx` (a web server) is listed under `packages`, which means that `nginx` will be automatically installed when the droplet is created. This saves you the effort of manually installing it after deployment and ensures that your server is ready to serve web content as soon as it's initialized.
-* `runcmd`: This section defines a set of commands to be run once the droplet has been initialized.
-  * The first command, `export PUBLIC_IPV4=$(curl -s http://169.254.169.254/metadata/v1/interfaces/public/0/ipv4/address)`, retrieves the droplet's public IPv4 address using the metadata service. The `curl` command makes an HTTP request to a special IP address (169.254.169.254) that provides information about the droplet, and the IP address is stored in the environment variable `PUBLIC_IPV4`.
-  * The second command, `echo Droplet: $(hostname), IP Address: $PUBLIC_IPV4 > /var/www/html/index.html`, creates a simple HTML file that displays the droplet's hostname and IP address. The file is saved at `/var/www/html/index.html`, which is the default directory served by `nginx`. When you visit the droplet's IP address in a browser, the web page will display this information, confirming that the server is running correctly.
+* `users`: This section specifies the user accounts to be created on the droplet.
+* `- name: user-name`: Creates a user account with the specific username(`user-name`). This comment indicates that this should be replaced with the desired username.
+* `primary_group: group-name`: Assigns the specified primary group to the user. This should be changed to the desired group name. The primary group determines the default group the user belongs to.
+* `groups: wheel`: Adds the user to the `wheel` group, which is typically used in Unix-like systems to grant users the ability to use the `sudo` command. This allows the user to perfrom administrative tasks.
 
 ## Deploying the droplet
 Now that everything is configured, you're ready to deploy your Arch Linux droplet using `doctl` and the `cloud-init` configuration file.
