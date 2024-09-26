@@ -46,6 +46,16 @@ sudo pacman -S doctl
 ```
 This installs the `doctl` package on your Arch Linux system using the pacman package manager.
 
+Here's a breakdown of the command:
+
+```bash
+sudo pacman -S doctl
+```
+- `sudo`: This command runs the following command with superuser (administrator) privileges. It is necessary for installing software and making system-level changes.
+- `pacman`: This is the package manager for Arch Linux. It is used to install, remove, and manage software packages on Arch-based systems.
+- `-S`: This option tells `pacman` to synchronize packages, specifically to install the package specified next.
+- `doctl`: This is the name of the package you want to install. In this case, it refers to the official DigitalOcean command-line tool used for managing resources on DigitalOcean.
+- 
 ![installing doctl](images/installing%20doctl.png)
 
 ## Generating API token
