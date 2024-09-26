@@ -22,8 +22,6 @@
     - [Droplet Creation Command:](#droplet-creation-command)
     - [Breakdown of Each Section:](#breakdown-of-each-section-1)
   - [Verifying everything worked](#verifying-everything-worked)
-  - [Conclusion](#conclusion)
-    - [Next Steps](#next-steps)
   - [References](#references)
 
 ## Introduction
@@ -138,6 +136,20 @@ disable_root: true
 * `- name: user-name`: Creates a user account with the specific username(`user-name`). This comment indicates that this should be replaced with the desired username.
 * `primary_group: group-name`: Assigns the specified primary group to the user. This should be changed to the desired group name. The primary group determines the default group the user belongs to.
 * `groups: wheel`: Adds the user to the `wheel` group, which is typically used in Unix-like systems to grant users the ability to use the `sudo` command. This allows the user to perfrom administrative tasks.
+* `shell: /bin/bash`: Sets the user's default shell to `bash`, which is a common command-line interface in Linux environments.
+* `sudo: ['ALL=(ALL) NOPASSWD:ALL']`: Configures the user to run any command with `sudo` without being prompted for a password. This can simplify automated scripts and commands that require administrative privileges.
+* `ssh-authorized-keys:`: This section allows you to specify SSH public keys that are authorized for the user to log in without a password.
+* `- ssh-ed25519 ...`: Specifies the SSH public key to be added for this user. The `ssh-ed25519` is a type of SSH key. The ellipsis (`...`) should be replaced with the actual public key.
+* `packages:`: This section lists the packages that should be installed on the droplet during its initialization.
+  - `- ripgrep`: A fast search tool that recursively searches your current directory for a regex pattern.
+  - `- rsync`: A utility for efficiently transferring and synchronizing files across systems.
+  - `- neovim`: An extensible text editor that serves as an improvement to the popular Vim editor.
+  - `- fd`: A simple, fast, and user-friendly alternative to `find`, which helps locate files and directories.
+  - `- less`: A terminal pager program that allows you to view (but not change) the contents of files one screen at a time.
+  - `- man-db`: The manual page database for Linux, allowing you to view documentation about commands and programs using the `man` command.
+  - `- bash-completion`: A package that provides command-line auto-completion for Bash, making it easier to work with commands and options.
+  - `- tmux`: A terminal multiplexer that allows you to create and manage multiple terminal sessions within a single window.
+* `disable_root: true`: Disables the root user account for security reasons, preventing direct root login and encouraing the use of the `sudo` command for adminitrative tasks instead.
 
 ## Deploying the droplet
 Now that everything is configured, you're ready to deploy your Arch Linux droplet using `doctl` and the `cloud-init` configuration file.
@@ -176,31 +188,11 @@ At this point, you are logged in and can explore the droplet.
 
 To verify that the nginx configuration is functioning, simply copy one of the droplet's public IP addresses and paste it into your web browser, then press Enter. You should see the nginx homepage, which will display the name of your droplet along with its IP address. This indicates that your setup was successful.
 
-## Conclusion
-Congratulations! You have successfully created an Arch Linux droplet on DigitalOcean using the `doctl` command-line tool and automated the setup with `cloud-init`. You learned how to generate SSH keys for secure access, upload a custom image, and configure your server environment effectively (Sobel, 2020; Chacon & Straub, 2017; Nash, 2021).
-
-### Next Steps
-- Explore additional packages and configurations you can install via `cloud-init` to enhance your server's capabilities.
-- Consider setting up a firewall using `ufw` to further secure your droplet.
-- Learn about configuring web servers or databases to utilize your new Arch Linux server for development or hosting purposes.
-
-By understanding these processes, you’re better equipped to manage and deploy servers in a cloud environment (Tung, 2020; Stallings & Brown, 2019; Limoncelli, Chalup, & Hogan, 2016).
-
 ## References
-- Arch Linux. (n.d.). *Installation guide*. Retrieved from [https://wiki.archlinux.org/title/Installation_guide](https://wiki.archlinux.org/title/Installation_guide)
-
 - Arch Linux. (n.d.). *SSH Keys*. Retrieved from [https://wiki.archlinux.org/title/Secure_Shell#SSH_keys](https://wiki.archlinux.org/title/Secure_Shell#SSH_keys)
 
 - Canonical. (n.d.). *Cloud-init*. Retrieved from [https://cloud-init.readthedocs.io/en/latest/](https://cloud-init.readthedocs.io/en/latest/)
 
-- Chacon, S., & Straub, B. (2017). *Pro Git* (2nd ed.). Apress. Retrieved from [https://git-scm.com/book/en/v2](https://git-scm.com/book/en/v2)
-
 - Cloud-init. (n.d.). *cloud-init docs*. Retrieved from [https://docs.cloud-init.io/en/latest/index.html](https://docs.cloud-init.io/en/latest/index.html)
-
-- DigitalOcean. (n.d.). *How to create and manage SSH keys on DigitalOcean*. Retrieved from [https://www.digitalocean.com/docs/ssh/create-ssh-keys/](https://www.digitalocean.com/docs/ssh/create-ssh-keys/)
-
-- DigitalOcean. (n.d.). *How to Perform Initial Server Configuration with Cloud-Init*. Retrieved from [https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup](https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup)
-
-- DigitalOcean. (n.d.). *How to use cloud-init to configure a droplet*. Retrieved from [https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/](https://www.digitalocean.com/docs/droplets/how-to/use-cloud-init/)
 
 - Sobel, M. (2020). *Learning Linux for iOS development: An introduction to Unix-based development for mobile applications*. Packt Publishing.
