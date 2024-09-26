@@ -9,16 +9,15 @@
     - [To Install `doctl`:](#to-install-doctl)
     - [Generating API token](#generating-api-token)
       - [To generate a personal access token:](#to-generate-a-personal-access-token)
-    - [Using the API token to grant account access to doctl](#using-the-api-token-to-grant-account-access-to-doctl)
-    - [Authenticating `doctl`:](#authenticating-doctl)
+    - [Using the API token to grant account access to `doctl`](#using-the-api-token-to-grant-account-access-to-doctl)
     - [Validating `doctl` is working](#validating-doctl-is-working)
   - [Setting up a SSH key](#setting-up-a-ssh-key)
     - [Understanding SSH Keys](#understanding-ssh-keys)
     - [Generating SSH Key Pair:](#generating-ssh-key-pair)
     - [Adding SSH Key to DigitalOcean:](#adding-ssh-key-to-digitalocean)
-  - [Configuring cloud-init](#configuring-cloud-init)
-    - [What is Cloud-Init?](#what-is-cloud-init)
-    - [Sample cloud-init Configuration File:](#sample-cloud-init-configuration-file)
+  - [Configuring `cloud-init`](#configuring-cloud-init)
+    - [What is `cloud-init`?](#what-is-cloud-init)
+    - [Sample `cloud-init` Configuration File:](#sample-cloud-init-configuration-file)
     - [Breakdown of Each Section:](#breakdown-of-each-section)
   - [Deploying the droplet](#deploying-the-droplet)
     - [Droplet Creation Command:](#droplet-creation-command)
@@ -53,6 +52,7 @@ Here's a breakdown of the command:
 - `doctl`: This is the name of the package you want to install. In this case, it refers to the official DigitalOcean command-line tool used for managing resources on DigitalOcean.
 
 ![installing doctl](images/installing%20doctl.png)
+The screenshot above shows the installation of `doctl`.
 
 ### Generating API token
 When you run the authentication, it will ask for an API token. This is the only step that needs to be done outside the Arch Linux droplet.
@@ -61,12 +61,11 @@ When you run the authentication, it will ask for an API token. This is the only 
   1. Log-in to your DigitalOcean Control Panel.
   2. On the left menu, click API (this takes you to the "Applications & API" page under the Tokens tab).
   3. In the Personal access tokens section, click the Generate New Token button.
-  4. You will receive your own personal access Token jsut like the screenshot below.
-
+  4. You will receive your own personal access Token just like the screenshot below.
 ![personal access token](images/new%20personal%20token.png)
 
-### Using the API token to grant account access to doctl
-Now that you have your API token, you can use it to link `doctl` to your DigitalOcean account. When you run `doctl auth init`, just enter the token when it asks for it. It looks like this:
+### Using the API token to grant account access to `doctl`
+Now that you have your API token, you can use it to link `doctl` to your DigitalOcean account. Here is what you should run:
 ```bash
 doctl auth init
 ```
@@ -77,14 +76,8 @@ Here's a breakdown of the command:
 - `auth`: This is a subcommand within `doctl` that deals with authentication. It manages how `doctl` connects to your DigitalOcean account.
 - `init`: This command initializes the authentication process. It prompts you to enter your DigitalOcean API token, linking `doctl` to your account for subsequent operations.
 
+Enter your access token to validate like the screenshot below.
 ![validating token](images/validating%20token.png)
-
-### Authenticating `doctl`:
-Once you have installed `doctl`, you will need to link it to your DigitalOcean account. To do that, run:
-```bash
-doctl auth init
-```
-![authenticate doctl](images/authenticate%20doctl.png)
 
 ### Validating `doctl` is working
 To confirm that you have successfully linked `doctl` to your account, you can look at your account details by running:
@@ -99,17 +92,11 @@ Here's a breakdown of the command:
 - `get`: This command retrieves information about the currently authenticated account. It displays details such as the email address associated with the account, the droplet limit, and whether the email has been verified.
 
 If successful, the output looks like:
-```bash
-Email                      Droplet Limit    Email Verified    UUID                                        Status
-sammy@example.org          10               true              3a56c5e109736b50e823eaebca85708ca0e5087c    active
-```
 ![validate doctl](images/validate%20account%20link.png)
 
 ## Setting up a SSH key
-SSH keys are great for secure, passwordless access to your server (Arch Linux, n.d.).
-
 ### Understanding SSH Keys
-SSH (Secure Shell) keys are a pair of cryptographic keys used for authenticating secure connections. Unlike passwords, SSH keys provide a more secure method of authentication as they are not transmitted over the network, making them resistant to brute-force attacks (Sobel, 2020). By using SSH keys, you can log in to your server without the need for a password, enhancing security.
+Secure Shell keys are great for secure, passwordless access to your server (Arch Linux, n.d.). SSH keys are a pair of cryptographic keys used for authenticating secure connections. Unlike passwords, SSH keys provide a more secure method of authentication as they are not transmitted over the network, making them resistant to brute-force attacks (Sobel, 2020). By using SSH keys, you can log in to your server without the need for a password, enhancing security.
 
 ### Generating SSH Key Pair:
 ```bash
@@ -134,12 +121,12 @@ Here’s a breakdown of the command:
 - `--public-key-file ~/.ssh/<your-key>.pub*: This option specifies the path to the public SSH key file that you want to upload to DigitalOcean. 
   - `~/.ssh/<your-key>.pub` means the public key is located in the `.ssh` directory in your home folder, with the filename `<your-key>.pub`. You should replace `<your-key>` with the actual name of your SSH key file (e.g., `do-key.pub`).
 
-## Configuring cloud-init
+## Configuring `cloud-init`
 
-### What is Cloud-Init?
+### What is `cloud-init`?
 `cloud-init` is a tool used in cloud environments to automate the initial setup of virtual machine (Canonical, n.d.; DigitalOcean, n.d.). It allows users to configure settings like network configuration, user creation, and package installation during the first boot of the instance (Canonical, n.d.; Cloud-init, n.d.). This automation reduces manual setup time and ensures consistency across deployments.
 
-### Sample cloud-init Configuration File:
+### Sample `cloud-init` Configuration File:
 After you upload your public SSH key to your DigitalOcean account, create a file named `cloud-config.yml` with the following content:
 ```bash
 #cloud-config
@@ -194,6 +181,7 @@ To create the droplets, run the following command:
 doctl compute droplet create --image arch-linux-2024-01-01 --size s-1vcpu-1gb --region nyc1 --ssh-keys git-user --user-data-file <path-to-your-cloud-init-file> --wait first-droplet second-droplet
 ```
 ### Breakdown of Each Section:
+* `doctl compute droplet create`: This is the base command used to create a new droplet.
 * `--image arch-linux-2024-01-01`: This option specifies the operating system image for the droplets, which in this case is arch-linux-2024-01-01.
 * `--size s-1vcpu-1gb`: This specifies the resources for each droplet. Here, each droplet is allocated one virtual CPU and 1 GB of RAM.
 * `--region nyc1`: This option defines the region for deploying the droplets. In this example, the droplets will be created in the NYC1 datacenter.
