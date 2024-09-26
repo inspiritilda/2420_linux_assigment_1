@@ -111,18 +111,27 @@ SSH (Secure Shell) keys are a pair of cryptographic keys used for authenticating
 After you upload your public SSH key to your DigitalOcean account, create a file named `cloud-config.yml` with the following content:
 ```bash
 #cloud-config
+#cloud-config
 users:
-  - name: example-user
+  - name: user-name #change me
+    primary_group: group-name #change me
+    groups: wheel
     shell: /bin/bash
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
-    ssh_import_id:
-      - gh:<your-GitHub-username>
-disable_root: true
+    ssh-authorized-keys:
+      - ssh-ed25519 ...
+
 packages:
-  - nginx
-runcmd:
-  - 'export PUBLIC_IPV4=$(curl -s http://169.254.169.254/metadata/v1/interfaces/public/0/ipv4/address)'
-  - 'echo Droplet: $(hostname), IP Address: $PUBLIC_IPV4 > /var/www/html/index.html'
+  - ripgrep
+  - rsync
+  - neovim
+  - fd
+  - less
+  - man-db
+  - bash-completion
+  - tmux
+
+disable_root: true
 ```
 
 ### Breakdown of Each Section:
