@@ -6,16 +6,16 @@
   - [Introduction](#introduction)
     - [Prerequisites:](#prerequisites)
   - [Installing and Setting up `doctl`](#installing-and-setting-up-doctl)
-    - [Installing `doctl`:](#installing-doctl)
+    - [To Install `doctl`:](#to-install-doctl)
     - [Generating API token](#generating-api-token)
       - [To generate a personal access token:](#to-generate-a-personal-access-token)
-    - [Use the API token to grant account access to doctl](#use-the-api-token-to-grant-account-access-to-doctl)
-    - [Authenticate `doctl`:](#authenticate-doctl)
-    - [Validate that`doctl` is working](#validate-thatdoctl-is-working)
+    - [Using the API token to grant account access to doctl](#using-the-api-token-to-grant-account-access-to-doctl)
+    - [Authenticating `doctl`:](#authenticating-doctl)
+    - [Validating `doctl` is working](#validating-doctl-is-working)
   - [Setting up a SSH key](#setting-up-a-ssh-key)
     - [Understanding SSH Keys](#understanding-ssh-keys)
-    - [Generate SSH Key Pair:](#generate-ssh-key-pair)
-    - [Add SSH Key to DigitalOcean:](#add-ssh-key-to-digitalocean)
+    - [Generating SSH Key Pair:](#generating-ssh-key-pair)
+    - [Adding SSH Key to DigitalOcean:](#adding-ssh-key-to-digitalocean)
   - [Configuring cloud-init](#configuring-cloud-init)
     - [What is Cloud-Init?](#what-is-cloud-init)
     - [Sample cloud-init Configuration File:](#sample-cloud-init-configuration-file)
@@ -39,7 +39,7 @@ We will go step by step to set up SSH keys for secure access, upload a custom Ar
 ## Installing and Setting up `doctl`
 `doctl` is the official DigitalOcean CLI tool, and it makes it super easy to manage everything right from your terminal (DigitalOcean, n.d.).
 
-### Installing `doctl`:
+### To Install `doctl`:
 On Arch Linux, install `doctl` with the pacman package manager. You can run:
 ```bash
 sudo pacman -S doctl
@@ -65,7 +65,7 @@ When you run the authentication, it will ask for an API token. This is the only 
 
 ![personal access token](images/new%20personal%20token.png)
 
-### Use the API token to grant account access to doctl
+### Using the API token to grant account access to doctl
 Now that you have your API token, you can use it to link `doctl` to your DigitalOcean account. When you run `doctl auth init`, just enter the token when it asks for it. It looks like this:
 ```bash
 doctl auth init
@@ -79,14 +79,14 @@ Here's a breakdown of the command:
 
 ![validating token](images/validating%20token.png)
 
-### Authenticate `doctl`:
+### Authenticating `doctl`:
 Once you have installed `doctl`, you will need to link it to your DigitalOcean account. To do that, run:
 ```bash
 doctl auth init
 ```
 ![authenticate doctl](images/authenticate%20doctl.png)
 
-### Validate that`doctl` is working
+### Validating `doctl` is working
 To confirm that you have successfully linked `doctl` to your account, you can look at your account details by running:
 ```bash
 doctl account get
@@ -111,7 +111,7 @@ SSH keys are great for secure, passwordless access to your server (Arch Linux, n
 ### Understanding SSH Keys
 SSH (Secure Shell) keys are a pair of cryptographic keys used for authenticating secure connections. Unlike passwords, SSH keys provide a more secure method of authentication as they are not transmitted over the network, making them resistant to brute-force attacks (Sobel, 2020). By using SSH keys, you can log in to your server without the need for a password, enhancing security.
 
-### Generate SSH Key Pair:
+### Generating SSH Key Pair:
 ```bash
 ssh-keygen -t ed25519 -f ~/.ssh/do-key -C "your email address"
 ```
@@ -123,7 +123,7 @@ Here's a breakdown of the command:
 - `-f ~/.ssh/do-key`: This option specifies the file path where the generated SSH key pair will be saved. `~/.ssh/do-key` means the key will be stored in the `.ssh` directory in the user's home directory with the base name `do-key`. The private key will be saved as `do-key`, and the public key will be saved as `do-key.pub`.
 - `-C "your email address"`: This option adds a comment to the key, which typically includes the user's email address. This comment helps identify the key later, especially if multiple keys are in use. 
 
-### Add SSH Key to DigitalOcean:
+### Adding SSH Key to DigitalOcean:
 Once your SSH key is generated, add it to your DigitalOcean account with:
 ```bash
 doctl compute ssh-key create <key-name> --public-key-file ~/.ssh/<your-key>.pub
