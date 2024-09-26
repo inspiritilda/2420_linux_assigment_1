@@ -5,10 +5,10 @@
   - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
     - [Prerequisites:](#prerequisites)
-  - [Installing and Setting up doctl](#installing-and-setting-up-doctl)
-    - [Steps to Install doctl:](#steps-to-install-doctl)
-  - [Generating API token](#generating-api-token)
-    - [To generate a personal access token:](#to-generate-a-personal-access-token)
+  - [Installing and Setting up `doctl`](#installing-and-setting-up-doctl)
+    - [Steps to Install `doctl`:](#steps-to-install-doctl)
+    - [Generating API token](#generating-api-token)
+      - [To generate a personal access token:](#to-generate-a-personal-access-token)
     - [Use the API token to grant account access to doctl](#use-the-api-token-to-grant-account-access-to-doctl)
   - [Authenticate `doctl`:](#authenticate-doctl)
     - [Validate that doctl is working](#validate-that-doctl-is-working)
@@ -36,10 +36,10 @@ We will go step by step to set up SSH keys for secure access, upload a custom Ar
 - A basic understanding of how to use the Linux command line.
 - This guide assumes you already have an Arch Linux droplet and can SSH into it.
 
-## Installing and Setting up doctl
+## Installing and Setting up `doctl`
 `doctl` is the official DigitalOcean CLI tool, and it makes it super easy to manage everything right from your terminal (DigitalOcean, n.d.).
 
-### Steps to Install doctl:
+### Steps to Install `doctl`:
 On Arch Linux, install `doctl` with the pacman package manager. You can run:
 ```bash
 sudo pacman -S doctl
@@ -54,10 +54,10 @@ Here's a breakdown of the command:
 - 
 ![installing doctl](images/installing%20doctl.png)
 
-## Generating API token
+### Generating API token
 When you run the authentication, it will ask for an API token. This is the only step that needs to be done outside the Arch Linux droplet.
 
-### To generate a personal access token:
+#### To generate a personal access token:
   1. Log-in to your DigitalOcean Control Panel.
   2. On the left menu, click API (this takes you to the "Applications & API" page under the Tokens tab).
   3. In the Personal access tokens section, click the Generate New Token button.
@@ -71,6 +71,11 @@ Now that you have your API token, you can use it to link `doctl` to your Digital
 doctl auth init
 ```
 This command initializes the `doctl` tool by linking it to your DigitalOcean account, prompting you to enter your API token for authentication.
+
+Here's a breakdown of the command:
+- `doctl`: This is the command-line tool for interacting with DigitalOcean's API. It allows users to manage DigitalOcean resources directly from the terminal.
+- `auth`: This is a subcommand within `doctl` that deals with authentication. It manages how `doctl` connects to your DigitalOcean account.
+- `init`: This command initializes the authentication process. It prompts you to enter your DigitalOcean API token, linking `doctl` to your account for subsequent operations.
 
 ![validating token](images/validating%20token.png)
 
