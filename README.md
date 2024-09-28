@@ -73,7 +73,6 @@ doctl auth init
 This command initializes the `doctl` tool by linking it to your DigitalOcean account, prompting you to enter your API token for authentication.
 
 Here's a breakdown of the command:
-* `doctl`: This is the command-line tool for interacting with DigitalOcean's API. It allows users to manage DigitalOcean resources directly from the terminal.
 * `auth`: This is a subcommand within `doctl` that deals with authentication. It manages how `doctl` connects to your DigitalOcean account.
 * `init`: This command initializes the authentication process. It prompts you to enter your DigitalOcean API token, linking `doctl` to your account for subsequent operations.
 
@@ -88,7 +87,6 @@ doctl account get
 This command retrieves and displays details about your DigitalOcean account, including the email associated with the account, droplet limits, and account status.
 
 Here's a breakdown of the command:
-* `doctl`: This is the command-line interface (CLI) tool for DigitalOcean, used to manage and interact with DigitalOcean resources from the terminal.
 * `account`: This subcommand refers to actions related to your DigitalOcean account, providing details and information about it.
 * `get`: This command retrieves information about the currently authenticated account. It displays details such as the email address associated with the account, the droplet limit, and whether the email has been verified.
 
