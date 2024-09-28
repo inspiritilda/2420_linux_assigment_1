@@ -7,27 +7,19 @@
     - [Prerequisites](#prerequisites)
   - [Installing and Setting up `doctl`](#installing-and-setting-up-doctl)
     - [To Install `doctl`](#to-install-doctl)
-      - [Here's a breakdown of the command:](#heres-a-breakdown-of-the-command)
     - [Generating API token](#generating-api-token)
       - [To generate a personal access token](#to-generate-a-personal-access-token)
     - [Using the API token to grant account access to `doctl`](#using-the-api-token-to-grant-account-access-to-doctl)
-      - [Here's a breakdown of the command:](#heres-a-breakdown-of-the-command-1)
     - [Validating `doctl` is working](#validating-doctl-is-working)
-      - [Here's a breakdown of the command:](#heres-a-breakdown-of-the-command-2)
   - [Setting up a SSH key](#setting-up-a-ssh-key)
     - [Understanding SSH Keys](#understanding-ssh-keys)
     - [Generating SSH Key Pair](#generating-ssh-key-pair)
-      - [Here's a breakdown of the command:](#heres-a-breakdown-of-the-command-3)
     - [Adding SSH Key to DigitalOcean](#adding-ssh-key-to-digitalocean)
-      - [Here’s a breakdown of the command:](#heres-a-breakdown-of-the-command-4)
   - [Configuring `cloud-init`](#configuring-cloud-init)
     - [What is `cloud-init`?](#what-is-cloud-init)
     - [Sample `cloud-init` Configuration File](#sample-cloud-init-configuration-file)
-      - [Here’s a breakdown of the command:](#heres-a-breakdown-of-the-command-5)
-      - [Here’s a breakdown of the command:](#heres-a-breakdown-of-the-command-6)
   - [Deploying the droplet](#deploying-the-droplet)
     - [Droplet Creation Command](#droplet-creation-command)
-      - [Here’s a breakdown of the command:](#heres-a-breakdown-of-the-command-7)
   - [Verifying everything worked](#verifying-everything-worked)
   - [References](#references)
 
@@ -50,7 +42,7 @@ sudo pacman -S doctl
 ```
 This installs the `doctl` package on your Arch Linux system using the pacman package manager.
 
-#### Here's a breakdown of the command:
+Here's a breakdown of the command:
 * `sudo`: This command runs the following command with superuser (administrator) privileges. It is necessary for installing software and making system-level changes.
 * `pacman`: This is the package manager for Arch Linux. It is used to install, remove, and manage software packages on Arch-based systems.
 * `-S`: This option tells `pacman` to synchronize packages, specifically to install the package specified next.
@@ -80,7 +72,7 @@ doctl auth init
 ```
 This command initializes the `doctl` tool by linking it to your DigitalOcean account, prompting you to enter your API token for authentication.
 
-#### Here's a breakdown of the command:
+Here's a breakdown of the command:
 * `doctl`: This is the command-line tool for interacting with DigitalOcean's API. It allows users to manage DigitalOcean resources directly from the terminal.
 * `auth`: This is a subcommand within `doctl` that deals with authentication. It manages how `doctl` connects to your DigitalOcean account.
 * `init`: This command initializes the authentication process. It prompts you to enter your DigitalOcean API token, linking `doctl` to your account for subsequent operations.
@@ -95,7 +87,7 @@ doctl account get
 ```
 This command retrieves and displays details about your DigitalOcean account, including the email associated with the account, droplet limits, and account status.
 
-#### Here's a breakdown of the command:
+Here's a breakdown of the command:
 * `doctl`: This is the command-line interface (CLI) tool for DigitalOcean, used to manage and interact with DigitalOcean resources from the terminal.
 * `account`: This subcommand refers to actions related to your DigitalOcean account, providing details and information about it.
 * `get`: This command retrieves information about the currently authenticated account. It displays details such as the email address associated with the account, the droplet limit, and whether the email has been verified.
@@ -113,7 +105,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/<key name> -C <youremail@email.com>
 ```
 This command generates a new SSH key pair. Follow the prompts to save it in the default location.
 
-#### Here's a breakdown of the command:
+Here's a breakdown of the command:
 * `ssh-keygen`: This is the command used to generate a new SSH key pair.
 * `-t ed25519`: The `-t` flag specifies the type of key to create. `ed25519` is the type of algorithm used for the SSH key.
 * `-f ~/.ssh/<key name>`: This tells the system to sae the key files in the `~/.ssh/` directory under the given name `<key name>`. The tilde (`~`) represents the user's home directory, and `.ssh` is a hidden folder typically used to store SSH-related files.
@@ -124,7 +116,7 @@ Once your SSH key is generated, add it to your DigitalOcean account with:
 ```bash
 doctl compute ssh-key import <key identifier> --public-key-file ~/.ssh/<key name>.pub
 ```
-#### Here’s a breakdown of the command:
+Here’s a breakdown of the command:
 * `compute ssh-key create`: `compute` is a category of `doctl` commands used to manage compute resources (like droplets) on DigitalOcean. `ssh-key import` is a subcommand under `compute` that imports an SSH public key into your DigitalOcean account, allowing you to use this key for authentication on droplets.
 * `<key identifier>`: This is the name or identifier you want to give to the SSH key within DigitalOcean for easy recognition. You can choose any name you like, and it will help you manage your keys, especially if you have multiple SSH keys associated with your account. This name will show up in the DigitalOcean control panel and API.
 * `--public-key-file ~/.ssh/<key name>.pub`: `--public-key-file` is a flag that specifies the path to the public key file you want to import. `~/.ssh/<key name>.pub` is the file path to the SSH public key you are importing.
@@ -140,7 +132,7 @@ To do that, run:
 nvim ~/cloud-config.yml
 ```
 
-#### Here’s a breakdown of the command:
+Here’s a breakdown of the command:
 * `nvim`: This is the command to start Neovim, a highly configurable text editor. It is commonly used in terminal environments, allowing users to create, edit, and manipulate text files. If Neovim is not installed on your system, this command will fail, and you'll need to install it first by running the command `sudo pacman -S neovim`.
 * `~/cloud-config.yml`: This is the path to the file you want to open. `cloud-config.yml` is typically a configuration file used by `cloud-init` for automating cloud infrastructure. This file contains the configuration details that a cloud instance will use when it boots up.
 
@@ -169,7 +161,7 @@ packages:
 disable_root: true
 ```
 
-#### Here’s a breakdown of the command:
+Here’s a breakdown of the command:
 * `users`: This section specifies the user accounts to be created on the droplet.
 * `- name: user-name`: Creates a user account with the specific username(`user-name`). This comment indicates that this should be replaced with the desired username.
 * `primary_group: group-name`: Assigns the specified primary group to the user. This should be changed to the desired group name. The primary group determines the default group the user belongs to.
@@ -198,7 +190,7 @@ To create the droplets, run the following command:
 doctl compute droplet create --image <your custome image ID> --size s-1vcpu-1gb --ssh-keys <SSH key ID> --region <your preferred region slug> --user-data-file ~/cloud-config.yml --wait <droplet name>
 ```
 
-#### Here’s a breakdown of the command:
+Here’s a breakdown of the command:
 * `doctl compute droplet create`: `compute` refers to DigitalOcean's compute resources. `droplet create` is an action to create a new Droplet (a virtual machine).
 * `--image <your custom image ID>`: Specifies the image to use for the Droplet, such as a custom OS image you've uploaded. Replace `<your custom image ID>` with the ID of your image.
 * `--size s-1vcpu-1gb`: Defines the Droplet's size,
