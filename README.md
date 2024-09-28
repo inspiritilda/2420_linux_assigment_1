@@ -32,16 +32,15 @@
 
 ## Introduction
 This guide will show you how to create an Arch Linux droplet on DigitalOcean using `doctl` command-line tool and `cloud-init` (DigitalOcean, n.d.).
-We will go step by step to set up SSH keys for secure access, upload a custom Arch Linux image, and automate the setup process with `cloud-init`.
+We will go step by step to set up SSH keys for secure access, and automate the setup process with `cloud-init`.
 
 ### Prerequisites
 - A DigitalOcean account.
-- `ssh` installed on your local machine.
 - A basic understanding of how to use the Linux command line.
 - This guide assumes you already have an Arch Linux droplet and can SSH into it.
 
 ## Installing and Setting up `doctl`
-`doctl` is the official DigitalOcean CLI tool, and it makes it super easy to manage everything right from your terminal (DigitalOcean, n.d.).
+`doctl` is the official DigitalOcean CLI (Command Line Interface) tool, and it makes it super easy to manage everything right from your terminal (DigitalOcean, n.d.).
 
 ### To Install `doctl`
 On Arch Linux, install `doctl` with the pacman package manager. You can run:
@@ -60,13 +59,17 @@ This installs the `doctl` package on your Arch Linux system using the pacman pac
 The screenshot above shows the installation of `doctl`.
 
 ### Generating API token
-When you run the authentication, it will ask for an API token. This is the only step that needs to be done outside the Arch Linux droplet.
+Before using `doctl`, you will have to give it access to your DigitalOcean account. In order to do that, you will need to generate an API token on the DigitalOcean website. This is the only step that needs to be done outside the Arch Linux droplet.
 
 #### To generate a personal access token
   1. Log-in to your DigitalOcean Control Panel.
   2. On the left menu, click API (this takes you to the "Applications & API" page under the Tokens tab).
   3. In the Personal access tokens section, click the Generate New Token button.
-  4. You will receive your own personal access Token just like the screenshot below.
+  4. Give your token a name.
+  5. Choose the preferred expiration date of your token.
+  6. Click Full Access in the Scopes section.
+  7. Then, click Generate Token.
+  8. You will receive your own personal access Token just like the screenshot below.
 ![personal access token](images/new%20personal%20token.png)
 
 ### Using the API token to grant account access to `doctl`
@@ -105,29 +108,27 @@ Secure Shell keys are great for secure, passwordless access to your server (Arch
 
 ### Generating SSH Key Pair
 ```bash
-ssh-keygen -t ed25519 -f ~/.ssh/do-key -C "your email address"
+ssh-keygen -t ed25519 -f ~/.ssh/<key name> -C <youremail@email.com>
 ```
 This command generates a new SSH key pair. Follow the prompts to save it in the default location.
 
 #### Here's a breakdown of the command:
 - `ssh-keygen`: This is the command used to generate a new SSH key pair.
-  *`-t ed25519`: This option specifies the type of key to create. In this case, `ed25519` is chosen for its enhanced security and performance compared to older algorithms like RSA.
-- `-f ~/.ssh/do-key`: This option specifies the file path where the generated SSH key pair will be saved. `~/.ssh/do-key` means the key will be stored in the `.ssh` directory in the user's home directory with the base name `do-key`. The private key will be saved as `do-key`, and the public key will be saved as `do-key.pub`.
-- `-C "your email address"`: This option adds a comment to the key, which typically includes the user's email address. This comment helps identify the key later, especially if multiple keys are in use. 
+- `-t ed25519`: The `-t` flag specifies the type of key to create. `ed25519` is the type of algorithm used for the SSH key.
+- `-f ~/.ssh/<key name>`: This tells the system to sae the key files in the `~/.ssh/` directory under the given name `<key name>`. The tilde (`~`) represents the user's home directory, and `.ssh` is a hidden folder typically used to store SSH-related files.
+- `-C <youremail@email.com>`: The `-C` flag is used to add a comment to the SSHkey for identification purposes. `<youremail@email.com>` is typically used as the comment, allowing you to easily identify the key.
 
 ### Adding SSH Key to DigitalOcean
 Once your SSH key is generated, add it to your DigitalOcean account with:
 ```bash
-doctl compute ssh-key create <key-name> --public-key-file ~/.ssh/<your-key>.pub
+doctl compute ssh-key import <key identifier> --public-key-file ~/.ssh/<key name>.pub
 ```
 #### Here’s a breakdown of the command:
-- `doctl compute ssh-key create`: This is the command to create a new SSH key in your DigitalOcean account using the `doctl` command-line tool, specifically for the compute resource.
-- `<key-name>`: This is a placeholder for the name you want to assign to the SSH key in DigitalOcean. You should replace `<key-name>` with a descriptive name (e.g., `my-ssh-key`) that helps identify this key.
-- `--public-key-file ~/.ssh/<your-key>.pub*: This option specifies the path to the public SSH key file that you want to upload to DigitalOcean. 
-  - `~/.ssh/<your-key>.pub` means the public key is located in the `.ssh` directory in your home folder, with the filename `<your-key>.pub`. You should replace `<your-key>` with the actual name of your SSH key file (e.g., `do-key.pub`).
+- `compute ssh-key create`: `compute` is a category of `doctl` commands used to manage compute resources (like droplets) on DigitalOcean. `ssh-key import` is a subcommand under `compute` that imports an SSH public key into your DigitalOcean account, allowing you to use this key for authentication on droplets.
+- `<key identifier>`: This is the name or identifier you want to give to the SSH key within DigitalOcean for easy recognition. You can choose any name you like, and it will help you manage your keys, especially if you have multiple SSH keys associated with your account. This name will show up in the DigitalOcean control panel and API.
+- `--public-key-file ~/.ssh/<key name>.pub`: `--public-key-file` is a flag that specifies the path to the public key file you want to import. `~/.ssh/<key name>.pub` is the file path to the SSH public key you are importing.
 
 ## Configuring `cloud-init`
-
 ### What is `cloud-init`?
 `cloud-init` is a tool used in cloud environments to automate the initial setup of virtual machine (Canonical, n.d.; DigitalOcean, n.d.). It allows users to configure settings like network configuration, user creation, and package installation during the first boot of the instance (Canonical, n.d.; Cloud-init, n.d.). This automation reduces manual setup time and ensures consistency across deployments.
 
