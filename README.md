@@ -218,17 +218,21 @@ ID           Name              Public IPv4       Private IPv4    Public IPv6    
 ```
 
 ## Verifying everything worked
-After successfully deploying the droplets, it is important to check if the cloud-init configuration was executed properly. You can log in to one of the droplets using the username defined in the `cloud-config.yaml file`. To do this, you can use the OpenSSH command shown below. Make sure to replace the placeholder with the public IPv4 address of your droplet:
-```bash
-ssh example-user@<your-droplet-ip-address>
-```
-If everything is set up correctly, your terminal prompt should change to something like this:
-```bash
-example-user@first-droplet:~$
-```
-At this point, you are logged in and can explore the droplet.
+Now that your Droplets are up and running, it's time to verify if everything is configured correctly by connecting via SSH.
 
-To verify that the `nginx` configuration is functioning, simply copy one of the droplet's public IP addresses and paste it into your web browser, then press Enter. You should see the nginx homepage, which will display the name of your droplet along with its IP address. This indicates that your setup was successful.
+First, you’ll need to retrieve the IPv4 address of your Droplet. Use the following command to list your running Droplets and find the relevant IP address:
+```bash
+doctl compute droplet list
+```
+This will display information about all of your Droplets, including their IPv4 addresses.
+
+Once you have the IPv4 address, you can immediately connect to your Droplet using SSH. Run the following command, replacing the placeholders with your private key, username, and the Droplet’s IP address:
+```bash
+ssh -i ~/.ssh/<private key> <username>@<IPv4 address>
+```
+If everything is set up correctly, your terminal prompt should change, indicating a successful connection.
+
+Congrats! You've successfully connected to your Droplet. 🎉 Now you can explore and manage your Droplets effortlessly.
 
 ## References
 1. Arch Linux. (n.d.). *Installation guide*. Retrieved from [https://wiki.archlinux.org/title/Installation_guide](https://wiki.archlinux.org/title/Installation_guide)  
