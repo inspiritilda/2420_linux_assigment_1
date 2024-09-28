@@ -24,9 +24,10 @@
     - [What is `cloud-init`?](#what-is-cloud-init)
     - [Sample `cloud-init` Configuration File](#sample-cloud-init-configuration-file)
       - [Here’s a breakdown of the command:](#heres-a-breakdown-of-the-command-5)
+      - [Here’s a breakdown of the command:](#heres-a-breakdown-of-the-command-6)
   - [Deploying the droplet](#deploying-the-droplet)
     - [Droplet Creation Command](#droplet-creation-command)
-      - [Here’s a breakdown of the command:](#heres-a-breakdown-of-the-command-6)
+      - [Here’s a breakdown of the command:](#heres-a-breakdown-of-the-command-7)
   - [Verifying everything worked](#verifying-everything-worked)
   - [References](#references)
 
@@ -50,10 +51,10 @@ sudo pacman -S doctl
 This installs the `doctl` package on your Arch Linux system using the pacman package manager.
 
 #### Here's a breakdown of the command:
-- `sudo`: This command runs the following command with superuser (administrator) privileges. It is necessary for installing software and making system-level changes.
-- `pacman`: This is the package manager for Arch Linux. It is used to install, remove, and manage software packages on Arch-based systems.
-- `-S`: This option tells `pacman` to synchronize packages, specifically to install the package specified next.
-- `doctl`: This is the name of the package you want to install. In this case, it refers to the official DigitalOcean command-line tool used for managing resources on DigitalOcean.
+* `sudo`: This command runs the following command with superuser (administrator) privileges. It is necessary for installing software and making system-level changes.
+* `pacman`: This is the package manager for Arch Linux. It is used to install, remove, and manage software packages on Arch-based systems.
+* `-S`: This option tells `pacman` to synchronize packages, specifically to install the package specified next.
+* `doctl`: This is the name of the package you want to install. In this case, it refers to the official DigitalOcean command-line tool used for managing resources on DigitalOcean.
 
 ![installing doctl](images/installing%20doctl.png)
 The screenshot above shows the installation of `doctl`.
@@ -80,9 +81,9 @@ doctl auth init
 This command initializes the `doctl` tool by linking it to your DigitalOcean account, prompting you to enter your API token for authentication.
 
 #### Here's a breakdown of the command:
-- `doctl`: This is the command-line tool for interacting with DigitalOcean's API. It allows users to manage DigitalOcean resources directly from the terminal.
-- `auth`: This is a subcommand within `doctl` that deals with authentication. It manages how `doctl` connects to your DigitalOcean account.
-- `init`: This command initializes the authentication process. It prompts you to enter your DigitalOcean API token, linking `doctl` to your account for subsequent operations.
+* `doctl`: This is the command-line tool for interacting with DigitalOcean's API. It allows users to manage DigitalOcean resources directly from the terminal.
+* `auth`: This is a subcommand within `doctl` that deals with authentication. It manages how `doctl` connects to your DigitalOcean account.
+* `init`: This command initializes the authentication process. It prompts you to enter your DigitalOcean API token, linking `doctl` to your account for subsequent operations.
 
 Enter your access token to validate like the screenshot below.
 ![validating token](images/validating%20token.png)
@@ -95,9 +96,9 @@ doctl account get
 This command retrieves and displays details about your DigitalOcean account, including the email associated with the account, droplet limits, and account status.
 
 #### Here's a breakdown of the command:
-- `doctl`: This is the command-line interface (CLI) tool for DigitalOcean, used to manage and interact with DigitalOcean resources from the terminal.
-- `account`: This subcommand refers to actions related to your DigitalOcean account, providing details and information about it.
-- `get`: This command retrieves information about the currently authenticated account. It displays details such as the email address associated with the account, the droplet limit, and whether the email has been verified.
+* `doctl`: This is the command-line interface (CLI) tool for DigitalOcean, used to manage and interact with DigitalOcean resources from the terminal.
+* `account`: This subcommand refers to actions related to your DigitalOcean account, providing details and information about it.
+* `get`: This command retrieves information about the currently authenticated account. It displays details such as the email address associated with the account, the droplet limit, and whether the email has been verified.
 
 If successful, the output looks like:
 ![validate doctl](images/validate%20account%20link.png)
@@ -113,10 +114,10 @@ ssh-keygen -t ed25519 -f ~/.ssh/<key name> -C <youremail@email.com>
 This command generates a new SSH key pair. Follow the prompts to save it in the default location.
 
 #### Here's a breakdown of the command:
-- `ssh-keygen`: This is the command used to generate a new SSH key pair.
-- `-t ed25519`: The `-t` flag specifies the type of key to create. `ed25519` is the type of algorithm used for the SSH key.
-- `-f ~/.ssh/<key name>`: This tells the system to sae the key files in the `~/.ssh/` directory under the given name `<key name>`. The tilde (`~`) represents the user's home directory, and `.ssh` is a hidden folder typically used to store SSH-related files.
-- `-C <youremail@email.com>`: The `-C` flag is used to add a comment to the SSHkey for identification purposes. `<youremail@email.com>` is typically used as the comment, allowing you to easily identify the key.
+* `ssh-keygen`: This is the command used to generate a new SSH key pair.
+* `-t ed25519`: The `-t` flag specifies the type of key to create. `ed25519` is the type of algorithm used for the SSH key.
+* `-f ~/.ssh/<key name>`: This tells the system to sae the key files in the `~/.ssh/` directory under the given name `<key name>`. The tilde (`~`) represents the user's home directory, and `.ssh` is a hidden folder typically used to store SSH-related files.
+* `-C <youremail@email.com>`: The `-C` flag is used to add a comment to the SSHkey for identification purposes. `<youremail@email.com>` is typically used as the comment, allowing you to easily identify the key.
 
 ### Adding SSH Key to DigitalOcean
 Once your SSH key is generated, add it to your DigitalOcean account with:
@@ -124,16 +125,26 @@ Once your SSH key is generated, add it to your DigitalOcean account with:
 doctl compute ssh-key import <key identifier> --public-key-file ~/.ssh/<key name>.pub
 ```
 #### Here’s a breakdown of the command:
-- `compute ssh-key create`: `compute` is a category of `doctl` commands used to manage compute resources (like droplets) on DigitalOcean. `ssh-key import` is a subcommand under `compute` that imports an SSH public key into your DigitalOcean account, allowing you to use this key for authentication on droplets.
-- `<key identifier>`: This is the name or identifier you want to give to the SSH key within DigitalOcean for easy recognition. You can choose any name you like, and it will help you manage your keys, especially if you have multiple SSH keys associated with your account. This name will show up in the DigitalOcean control panel and API.
-- `--public-key-file ~/.ssh/<key name>.pub`: `--public-key-file` is a flag that specifies the path to the public key file you want to import. `~/.ssh/<key name>.pub` is the file path to the SSH public key you are importing.
+* `compute ssh-key create`: `compute` is a category of `doctl` commands used to manage compute resources (like droplets) on DigitalOcean. `ssh-key import` is a subcommand under `compute` that imports an SSH public key into your DigitalOcean account, allowing you to use this key for authentication on droplets.
+* `<key identifier>`: This is the name or identifier you want to give to the SSH key within DigitalOcean for easy recognition. You can choose any name you like, and it will help you manage your keys, especially if you have multiple SSH keys associated with your account. This name will show up in the DigitalOcean control panel and API.
+* `--public-key-file ~/.ssh/<key name>.pub`: `--public-key-file` is a flag that specifies the path to the public key file you want to import. `~/.ssh/<key name>.pub` is the file path to the SSH public key you are importing.
 
 ## Configuring `cloud-init`
 ### What is `cloud-init`?
 `cloud-init` is a tool used in cloud environments to automate the initial setup of virtual machine (Canonical, n.d.; DigitalOcean, n.d.). It allows users to configure settings like network configuration, user creation, and package installation during the first boot of the instance (Canonical, n.d.; Cloud-init, n.d.). This automation reduces manual setup time and ensures consistency across deployments.
 
 ### Sample `cloud-init` Configuration File
-After you upload your public SSH key to your DigitalOcean account, create a file named `cloud-config.yml` with the following content:
+After you upload your public SSH key to your DigitalOcean account, you will have to create and open a `cloud-init` configuration file named `cloud-config.yml`.
+To do that, run:
+```bash
+nvim ~/cloud-config.yml
+```
+
+#### Here’s a breakdown of the command:
+* `nvim`: This is the command to start Neovim, a highly configurable text editor. It is commonly used in terminal environments, allowing users to create, edit, and manipulate text files. If Neovim is not installed on your system, this command will fail, and you'll need to install it first by running the command `sudo pacman -S neovim`.
+* `~/cloud-config.yml`: This is the path to the file you want to open. `cloud-config.yml` is typically a configuration file used by `cloud-init` for automating cloud infrastructure. This file contains the configuration details that a cloud instance will use when it boots up.
+
+Then, copy and paste the code below into your file:
 ```bash
 #cloud-config
 users:
@@ -143,7 +154,7 @@ users:
     shell: /bin/bash
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     ssh-authorized-keys:
-      - ssh-ed25519 ...
+      - ssh-ed25519 <your ssh public key string>
 
 packages:
   - ripgrep
@@ -184,17 +195,20 @@ Now that everything is configured, you're ready to deploy your Arch Linux drople
 ### Droplet Creation Command
 To create the droplets, run the following command:
 ``` bash
-doctl compute droplet create --image arch-linux-2024-01-01 --size s-1vcpu-1gb --region nyc1 --ssh-keys git-user --user-data-file <path-to-your-cloud-init-file> --wait first-droplet second-droplet
+doctl compute droplet create --image <your custome image ID> --size s-1vcpu-1gb --ssh-keys <SSH key ID> --region <your preferred region slug> --user-data-file ~/cloud-config.yml --wait <droplet name>
 ```
+
 #### Here’s a breakdown of the command:
-* `doctl compute droplet create`: This is the base command used to create a new droplet.
-* `--image arch-linux-2024-01-01`: This option specifies the operating system image for the droplets, which in this case is arch-linux-2024-01-01.
-* `--size s-1vcpu-1gb`: This specifies the resources for each droplet. Here, each droplet is allocated one virtual CPU and 1 GB of RAM.
-* `--region nyc1`: This option defines the region for deploying the droplets. In this example, the droplets will be created in the NYC1 datacenter.
-* `--ssh-keys`: This parameter allows you to import SSH keys into the droplet from your DigitalOcean account. You can list available keys using the command `doctl compute ssh-key list`.
-* `--user-data-file <path-to-your-cloud-init-file`: This specifies the path to your `cloud-config.yaml file`. For instance, it could look something like `/Users/example-user/cloud-config.yaml`.
-* `--wait`: This ensures that the command will not return until the droplet is fully created and ready for use.
-* `first-droplet second-droplet`: These are the names of the droplets being created. You can name as many droplets as you want by adding more names at the end of the command.
+* `doctl compute droplet create`: `compute` refers to DigitalOcean's compute resources. `droplet create` is an action to create a new Droplet (a virtual machine).
+* `--image <your custom image ID>`: Specifies the image to use for the Droplet, such as a custom OS image you've uploaded. Replace `<your custom image ID>` with the ID of your image.
+* `--size s-1vcpu-1gb`: Defines the Droplet's size,
+`s-1vcpu-1gb` (Droplet with 1 virtual CPU and 1 GB RAM).
+This is suitable for lightweight workloads.
+* `--ssh-keys <SSH key ID>`: Adds the specified SSH key(s) to the Droplet for secure access. Replace `<SSH key ID>` with the actual ID of the SSH key you’ve already uploaded to DigitalOcean. You can find the SSH key IDs using `doctl compute ssh-key list`.
+* `--region <your preferred region slug>`: Specifies the region where the Droplet will be created. Replace `<your preferred region slug>` with a valid region code, such as `nyc1` (New York), `sfo3` (San Francisco), or others depending on your preference.
+* `--user-data-file ~/cloud-config.yml`: Defines the `cloud-init` file that will be used for provisioning and configuring the Droplet. This file contains automation scripts for setting up users, installing packages, configuring services, etc.
+* `--wait`: Makes the command wait until the Droplet creation process is complete before exiting. Ensures the Droplet is ready to use after the command runs.
+* `<droplet name>`: The name of the Droplet. Replace `<droplet name>` with the desired name for your Droplet (e.g., my-droplet).
 
 After executing the command, the terminal will not display a prompt until the droplets finish deploying, which may take a few minutes. Once the deployment is successful, the output will resemble the following:
 ```bash
