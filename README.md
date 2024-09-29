@@ -192,6 +192,17 @@ The screenshot above shows inserting cloud-config code into the file.
 
 After you have pasted the code above in your file, press ESC on your keyboard to exit INSERT mode. Then save and exit your file by typing `:wq` and pressing ENTER.
 
+Once you are done with configuring your `cloud-config.yml` file, run the command:
+```bash
+cat ~/cloud-config.yml
+```
+
+Here’s a breakdown of the command:
+* `cat`: Short for "concatenate," `cat` is a command-line utility that reads files and outputs their contents to the terminal. It's often used to view the content of text files.
+
+![cat](images/cat.png)
+The screenshot above shows a completed `cloud-init` configuration file.
+
 ## Deploying the droplet
 Now that everything is configured, you're ready to deploy your Arch Linux droplet using `doctl` and the `cloud-init` configuration file.
 
