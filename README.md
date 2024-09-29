@@ -207,7 +207,33 @@ The screenshot above shows a completed `cloud-init` configuration file.
 Now that everything is configured, you're ready to deploy your Arch Linux droplet using `doctl` and the `cloud-init` configuration file.
 
 ### Droplet Creation Command
-To create the droplets, run the following command:
+You will want to gather some essential information before deploying the droplet. This includes your uploaded SSH key ID, custom Arch Linux image ID, and the region slug.
+
+To retrieve Custom Image ID, run:
+``` bash
+doctl compute image list-user
+```
+Here’s a breakdown of the command:
+* `doctl compute image`: accesses the compute resources and specifically focuses on images.
+* `list-user`: filters the images to display only custom images you have uploaded to your account.
+
+To retrieve SSH Key ID, run:
+``` bash
+doctl compute ssh-key list
+```
+Here’s a breakdown of the command:
+* `doctl compute ssh-key`: accesses your SSH keys.
+* `list`: lists all the keys associated with your DigitalOcean account, along with their IDs and fingerprints.
+
+To retrieve Region Slug, run:
+``` bash
+doctl compute region list
+```
+Here’s a breakdown of the command:
+* `doctl compute region`: provides access to the regions available for droplet deployment.
+* `list`: outputs all available regions and their slugs.
+
+After gathering all the necessary information, you are ready to create the droplets. Run the following command:
 ``` bash
 doctl compute droplet create --image <your custome image ID> --size s-1vcpu-1gb --ssh-keys <SSH key ID> --region <your preferred region slug> --user-data-file ~/cloud-config.yml --wait <droplet name>
 ```
