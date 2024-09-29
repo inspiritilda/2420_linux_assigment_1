@@ -142,7 +142,7 @@ Here’s a breakdown of the command:
 * `nvim`: This is the command to start Neovim, a highly configurable text editor. It is commonly used in terminal environments, allowing users to create, edit, and manipulate text files. If Neovim is not installed on your system, this command will fail, and you'll need to install it first by running the command `sudo pacman -S neovim`.
 * `~/cloud-config.yml`: This is the path to the file you want to open. `cloud-config.yml` is typically a configuration file used by `cloud-init` for automating cloud infrastructure. This file contains the configuration details that a cloud instance will use when it boots up.
 
-Then, copy and paste the code below into your file:
+Copy and paste the code below into your file by pressing i on your keyboard (this initiates the insert mode), then press Enter:
 ```bash
 #cloud-config
 users:
@@ -186,6 +186,9 @@ Here’s a breakdown of the command:
   - `- bash-completion`: A package that provides command-line auto-completion for Bash, making it easier to work with commands and options.
   - `- tmux`: A terminal multiplexer that allows you to create and manage multiple terminal sessions within a single window.
 * `disable_root: true`: Disables the root user account for security reasons, preventing direct root login and encouraing the use of the `sudo` command for adminitrative tasks instead.
+
+![inserting cloud config](images/cloud-init%20insert.png)
+The screenshot above shows inserting cloud-config code.
 
 ## Deploying the droplet
 Now that everything is configured, you're ready to deploy your Arch Linux droplet using `doctl` and the `cloud-init` configuration file.
