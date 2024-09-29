@@ -109,6 +109,11 @@ Here's a breakdown of the command:
 * `-f ~/.ssh/<key name>`: This tells the system to sae the key files in the `~/.ssh/` directory under the given name `<key name>`. The tilde (`~`) represents the user's home directory, and `.ssh` is a hidden folder typically used to store SSH-related files.
 * `-C <youremail@email.com>`: The `-C` flag is used to add a comment to the SSHkey for identification purposes. `<youremail@email.com>` is typically used as the comment, allowing you to easily identify the key.
 
+After generating the key, the prompt will ask you to put in the passcode. Enter the same password and if successful, the output will show something like the screenshot below.
+
+![ssh key](images/generating%20ssh%20key.png)
+The screenshot above shows the generated SSH key.
+
 ### Adding SSH Key to DigitalOcean
 Once your SSH key is generated, add it to your DigitalOcean account with:
 ```bash
