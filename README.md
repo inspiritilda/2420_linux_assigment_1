@@ -267,6 +267,9 @@ Here’s a breakdown of the command:
 * `doctl compute droplet`: Accesses the compute resources, specifically focusing on droplets.
 * `list`: Lists all droplets under your DigitalOcean account, showing details like the droplet ID, name, IP address, and status.
 
+![droplet list](images/droplet%20list.png)
+The screenshot above shows the current lists of droplets.
+
 Once you have the IPv4 address, you can immediately connect to your Droplet using SSH. Run the following command, replacing the placeholders with your private key, username, and the Droplet’s IP address:
 ```bash
 ssh -i ~/.ssh/<private key> <username>@<IPv4 address>
@@ -278,7 +281,8 @@ Here’s a breakdown of the command:
 * `<username>`: Replace with the user account for your droplet (typically `root` for the initial login).
 * `<IPv4 address>`: The public IP address of your droplet, which you can retrieve from the output of the `doctl compute droplet list command`.
 
-If everything is set up correctly, your terminal prompt should change, indicating a successful connection.
+If everything is set up correctly, your terminal prompt should change, indicating a successful connection like the screenshot below.
+![inside the droplet](images/inside%20the%20droplet.png)
 
 Congrats! You've successfully connected to your Droplet. 🎉 Now you can explore and manage your Droplets effortlessly.
 
