@@ -111,18 +111,21 @@ Here's a breakdown of the command:
 
 After generating the key, the prompt will ask you to put in the passcode. Enter the same password and if successful, the output will show something like the screenshot below.
 
-![ssh key](images/generating%20ssh%20key.png)
+![generating ssh key](images/generating%20ssh%20key.png)
 The screenshot above shows the generated SSH key.
 
 ### Adding SSH Key to DigitalOcean
 Once your SSH key is generated, add it to your DigitalOcean account with:
 ```bash
-doctl compute ssh-key import <key identifier> --public-key-file ~/.ssh/<key name>.pub
+doctl compute ssh-key import <digital ocean key name> --public-key-file ~/.ssh/<key name>.pub
 ```
 Here’s a breakdown of the command:
 * `compute ssh-key create`: `compute` is a category of `doctl` commands used to manage compute resources (like droplets) on DigitalOcean. `ssh-key import` is a subcommand under `compute` that imports an SSH public key into your DigitalOcean account, allowing you to use this key for authentication on droplets.
-* `<key identifier>`: This is the name or identifier you want to give to the SSH key within DigitalOcean for easy recognition. You can choose any name you like, and it will help you manage your keys, especially if you have multiple SSH keys associated with your account. This name will show up in the DigitalOcean control panel and API.
+* `<digital ocean key name>`: This is the name or identifier you want to give to the SSH key within DigitalOcean for easy recognition. You can choose any name you like, and it will help you manage your keys, especially if you have multiple SSH keys associated with your account. This name will show up in the DigitalOcean control panel and API.
 * `--public-key-file ~/.ssh/<key name>.pub`: `--public-key-file` is a flag that specifies the path to the public key file you want to import. `~/.ssh/<key name>.pub` is the file path to the SSH public key you are importing.
+  
+![adding ssh key](images/adding%20ssh%20key.png)
+The screenshot above shows adding the SSH key.
 
 ## Configuring `cloud-init`
 ### What is `cloud-init`?
