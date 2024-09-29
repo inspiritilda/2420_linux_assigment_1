@@ -251,11 +251,8 @@ This is suitable for lightweight workloads.
 * `<droplet name>`: The name of the Droplet. Replace `<droplet name>` with the desired name for your Droplet (e.g., my-droplet).
 
 After executing the command, the terminal will not display a prompt until the droplets finish deploying, which may take a few minutes. Once the deployment is successful, the output will resemble the following:
-```bash
-ID           Name              Public IPv4       Private IPv4    Public IPv6    Memory    VCPUs    Disk    Region    Image               VPC UUID                                Status    Tags    Features                            Volumes
-311143987    second-droplet    203.0.113.199    203.0.113.4                     1024      1        25      nyc1      Ubuntu 22.04 x64    cfcbcc95-365a-4705-a18d-54abde1fc7b4    active            droplet_agent,private_networking
-311912986    first-droplet     203.0.113.146    203.0.113.3                     1024      1        25      nyc1      Ubuntu 22.04 x64    cfcbcc95-365a-4705-a18d-54abde1fc7b4    active            droplet_agent,private_networking
-```
+
+![deployed droplet](images/deploying%20droplet%20output.png)
 
 ## Verifying everything worked
 Now that your Droplets are up and running, it's time to verify if everything is configured correctly by connecting via SSH.
@@ -266,10 +263,21 @@ doctl compute droplet list
 ```
 This will display information about all of your Droplets, including their IPv4 addresses.
 
+Here’s a breakdown of the command:
+* `doctl compute droplet`: Accesses the compute resources, specifically focusing on droplets.
+* `list`: Lists all droplets under your DigitalOcean account, showing details like the droplet ID, name, IP address, and status.
+
 Once you have the IPv4 address, you can immediately connect to your Droplet using SSH. Run the following command, replacing the placeholders with your private key, username, and the Droplet’s IP address:
 ```bash
 ssh -i ~/.ssh/<private key> <username>@<IPv4 address>
 ```
+
+Here’s a breakdown of the command:
+* `ssh`: The command to initiate an SSH connection.
+* `-i ~/.ssh/<private key>`: Specifies the path to your private SSH key, replacing `<private key>` with the actual filename of the key you've used when deploying the droplet.
+* `<username>`: Replace with the user account for your droplet (typically `root` for the initial login).
+* `<IPv4 address>`: The public IP address of your droplet, which you can retrieve from the output of the `doctl compute droplet list command`.
+
 If everything is set up correctly, your terminal prompt should change, indicating a successful connection.
 
 Congrats! You've successfully connected to your Droplet. 🎉 Now you can explore and manage your Droplets effortlessly.
